@@ -15,7 +15,7 @@ app.config["SECRET_KEY"] = os.getenv("API_SECRET_KEY")
 
 def create_tokens(user_id):
     payload = {
-        'exp': datetime.utcnow() + timedelta(seconds=30),
+        'exp': datetime.utcnow() + timedelta(minutes=15),
         'iat': datetime.utcnow(),
         'sub': user_id
     }
@@ -25,7 +25,7 @@ def create_tokens(user_id):
                               algorithm="HS256")
 
     payload = {
-        'exp': datetime.utcnow() + timedelta(minutes=1),
+        'exp': datetime.utcnow() + timedelta(hours=10),
         'iat': datetime.utcnow(),
         'sub': user_id
     }
@@ -65,8 +65,8 @@ def token_required(f):
         except jwt.exceptions.InvalidTokenError as m:
             return jsonify({"InvalidTokenError": m.args[0]}), 401
 
-        except jwt.exceptions:
-            return jsonify({"Error": "Other problem with access token"}), 401
+        except Exception:
+            return jsonify({"Error": "Other problem with access token"}), 500
 
         else:
             return f(*args, **kwargs)
@@ -82,21 +82,21 @@ def refreshing_access_token(refresh_token):
         decoded_refresh_token = jwt.decode(refresh_token, app.config["SECRET_KEY"], algorithms=['HS256'])
 
     except jwt.exceptions.ExpiredSignatureError:
-        return jsonify({"Your session has expired ": "login again"}), 401
+        return jsonify({"Your session has expired": "login again"}), 401
 
     except jwt.exceptions.InvalidSignatureError as m:
-        return jsonify({"InvalidSignatureError": m.args[0]}, 400)
+        return jsonify({"InvalidSignatureError": m.args[0]}), 401
 
     except jwt.exceptions.InvalidTokenError as m:
         return jsonify({"InvalidTokenError": m.args[0]}), 401
 
-    except jwt.exceptions:
-        return jsonify({"Error": "Other problem with refresh token"}), 401
+    except Exception:
+        return jsonify({"Error": "Other problem with refresh token"}), 500
 
     else:
         user_id = decoded_refresh_token["sub"]
         payload = {
-            'exp': datetime.utcnow() + timedelta(seconds=30),
+            'exp': datetime.utcnow() + timedelta(minutes=15),
             'iat': datetime.utcnow(),
             'sub': user_id
         }
@@ -245,8 +245,8 @@ def add_score():
     try:
         # Assignment request body into request data variable.
         request_data = request.get_json()
-        query = """INSERT INTO top_scores(user_id, amount_won)
-                   VALUES(%(user_id)s, %(amount_won)s)"""
+        query = """INSERT INTO top_scores(user_id, points)
+                   VALUES(%(user_id)s, %(points)s)"""
         # Execute and commit query.
         cur.execute(query, request_data)
         connection.commit()
@@ -254,12 +254,12 @@ def add_score():
     except mysql.connector.Error as message:
         # If is error in sql syntax, user declared bad name of key.
         if "You have an error in your SQL syntax" in message.msg:
-            return jsonify(result="Required keys: user_id, amount_won."), 400
+            return jsonify(result="Required keys: user_id, points."), 400
         else:
             return jsonify(result=message.msg), 500
     # If it succeeds, return json of info about created user with 201 status code.
     else:
-        return jsonify(result=request_data), 201
+        return jsonify(result="Score added successfully"), 201
     # Closing connection and cursor.
     finally:
         connection.close()
@@ -311,15 +311,15 @@ def add_questions():
 
     except (IndexError, ValueError):
         return jsonify(result="The question was worded incorrectly. Wording required: "
-                                   "[{tresc:nowe pytanie, odp:[odpowiedz1, odpowiedz2, odpowiedz3, odpowiedz4], "
-                                   "odp_poprawna:C, trudnosc:0}] or {tresc:nowe pytanie, odp:[odpowiedz1, odpowiedz2,"
-                                   " odpowiedz3, odpowiedz4], odp_poprawna:C, trudnosc:0}."), 400
+                              "[{tresc:nowe pytanie, odp:[odpowiedz1, odpowiedz2, odpowiedz3, odpowiedz4], "
+                              "odp_poprawna:C, trudnosc:0}] or {tresc:nowe pytanie, odp:[odpowiedz1, odpowiedz2,"
+                              " odpowiedz3, odpowiedz4], odp_poprawna:C, trudnosc:0}."), 400
 
     except mysql.connector.Error as message:
         return jsonify(result=message.msg), 500
 
     else:
-        return jsonify(result=request_body), 201
+        return jsonify(result="question added successfully"), 201
 
     finally:
         connection.close()
@@ -418,7 +418,7 @@ def update_user(user_id):
 
     except ReferenceError:
         return jsonify(result="User with given id does not exist or "
-                                     "you are trying to update a resource with the same data."), 404
+                              "you are trying to update a resource with the same data."), 409
     # If it succeeds, return json of info about created user with 201 status code.
     else:
         return jsonify(result="Update successful."), 200
@@ -451,7 +451,7 @@ def delete_user(user_id):
         return jsonify(result=message.msg), 500
 
     except ReferenceError:
-        return jsonify(result="User with given id does not exist or has already been deleted."), 404
+        return jsonify(result="User with given id does not exist or has already been deleted."), 409
     else:
         return jsonify(result="Deletion completed successfully."), 200
     # Closing connection and cursor.
