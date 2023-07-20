@@ -320,9 +320,9 @@ def get_scores():
 
         else:
             # Making query.
-            query = f"""SELECT DISTINCT users.first_name, users.last_name, top_scores.points FROM users
-                        JOIN top_scores ON users.user_id=top_scores.user_id
-                        ORDER BY points DESC"""
+            query = """SELECT DISTINCT users.first_name, users.last_name, top_scores.points FROM users
+                       JOIN top_scores ON users.user_id=top_scores.user_id
+                       ORDER BY points DESC"""
         # Executing query.
         cur.execute(query)
 
