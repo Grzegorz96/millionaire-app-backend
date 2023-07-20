@@ -150,12 +150,14 @@ def refreshing_access_token(refresh_token):
 # Function for getting questions.
 @app.route("/questions", methods=["GET"])
 def get_questions():
-    # Making connection and cursor as dictionary.
-    connection = database_connect()
-    cur = connection.cursor(dictionary=True)
-
+    # Making empty connection and cursor, if connection and cursor won't be created then in finally won't be error.
+    connection = None
+    cur = None
     # Trying to perform a database operation.
     try:
+        # Making connection and cursor as dictionary.
+        connection = database_connect()
+        cur = connection.cursor(dictionary=True)
         # Making query.
         query = """SELECT content, A, B, C, D, right_answer, difficulty FROM questions"""
         # Execute SELECT query.
@@ -169,21 +171,26 @@ def get_questions():
     else:
         return jsonify(result=cur.fetchall()), 200
 
-    # Closing connection with database and cursor.
+    # Closing connection with database and cursor if it exists.
     finally:
-        connection.close()
-        cur.close()
+        if connection:
+            connection.close()
+            if cur:
+                cur.close()
 
 
 # Function for checking data received from user.
 @app.route("/users/register/check-data", methods=["GET"])
 def check_data_for_registration():
-    # Making connection and cursor as dictionary.
-    connection = database_connect()
-    cur = connection.cursor(dictionary=True)
+    # Making empty connection and cursor, if connection and cursor won't be created then in finally won't be error.
+    connection = None
+    cur = None
 
     # Trying to perform a database operation.
     try:
+        # Making connection and cursor as dictionary.
+        connection = database_connect()
+        cur = connection.cursor(dictionary=True)
         # Creating request data from request body.
         request_data = request.get_json()
         # Making query.
@@ -208,10 +215,12 @@ def check_data_for_registration():
         else:
             return jsonify(result="login or e-mail are not available"), 226
 
-    # Closing connection with database and cursor.
+    # Closing connection with database and cursor if it exists.
     finally:
-        connection.close()
-        cur.close()
+        if connection:
+            connection.close()
+            if cur:
+                cur.close()
 
 
 # Function for sending activation numbers to new users.
@@ -236,12 +245,15 @@ def send_activation_number():
 # Function adding (register) user.
 @app.route("/users/register", methods=["POST"])
 def register_user():
-    # Making connection and cursor.
-    connection = database_connect()
-    cur = connection.cursor(dictionary=True)
+    # Making empty connection and cursor, if connection and cursor won't be created then in finally won't be error.
+    connection = None
+    cur = None
 
     # Trying to perform a database operation.
     try:
+        # Making connection and cursor.
+        connection = database_connect()
+        cur = connection.cursor(dictionary=True)
         # Assignment request body into request data variable.
         request_data = request.get_json()
         # Making query.
@@ -275,21 +287,26 @@ def register_user():
     else:
         return jsonify(result="User successfully created."), 201
 
-    # Closing connection and cursor.
+    # Closing connection and cursor if it exists.
     finally:
-        connection.close()
-        cur.close()
+        if connection:
+            connection.close()
+            if cur:
+                cur.close()
 
 
 # Get_scores function.
 @app.route("/scores", methods=["GET"])
 def get_scores():
-    # Making connection and cursor.
-    connection = database_connect()
-    cur = connection.cursor(dictionary=True)
+    # Making empty connection and cursor, if connection and cursor won't be created then in finally won't be error.
+    connection = None
+    cur = None
 
     # Trying to perform a database operation.
     try:
+        # Making connection and cursor.
+        connection = database_connect()
+        cur = connection.cursor(dictionary=True)
         # Assigning ?limit= from parameter into limit variable.
         limit = request.args.get("limit")
         # Checking is user given limit parameter. If he did, creating query with limit if he didn't, query will not
@@ -324,22 +341,27 @@ def get_scores():
     else:
         return jsonify(result=cur.fetchall()), 200
 
-    # Closing connection and cursor.
+    # Closing connection and cursor if it exists.
     finally:
-        connection.close()
-        cur.close()
+        if connection:
+            connection.close()
+            if cur:
+                cur.close()
 
 
 # Add_score function (protected by access_token).
 @app.route("/scores", methods=["POST"])
 @token_required
 def add_score():
-    # Making connection and cursor.
-    connection = database_connect()
-    cur = connection.cursor(dictionary=True)
+    # Making empty connection and cursor, if connection and cursor won't be created then in finally won't be error.
+    connection = None
+    cur = None
 
     # Trying to perform a database operation.
     try:
+        # Making connection and cursor.
+        connection = database_connect()
+        cur = connection.cursor(dictionary=True)
         # Assignment request body into request data variable.
         request_data = request.get_json()
         # Making query.
@@ -363,22 +385,27 @@ def add_score():
     else:
         return jsonify(result="Score added successfully"), 201
 
-    # Closing connection and cursor.
+    # Closing connection and cursor if it exists.
     finally:
-        connection.close()
-        cur.close()
+        if connection:
+            connection.close()
+            if cur:
+                cur.close()
 
 
 # Add_questions function (protected by access_token).
 @app.route("/questions", methods=["POST"])
 @token_required
 def add_questions():
-    # Making connection and cursor.
-    connection = database_connect()
-    cur = connection.cursor()
+    # Making empty connection and cursor, if connection and cursor won't be created then in finally won't be error.
+    connection = None
+    cur = None
 
     # Trying to perform a database operation.
     try:
+        # Making connection and cursor.
+        connection = database_connect()
+        cur = connection.cursor()
         # Assignment request body into request data variable.
         request_body = request.get_json()
         # Making query.
@@ -442,21 +469,26 @@ def add_questions():
     else:
         return jsonify(result="question added successfully"), 201
 
-    # Closing connection and cursor.
+    # Closing connection and cursor if it exists.
     finally:
-        connection.close()
-        cur.close()
+        if connection:
+            connection.close()
+            if cur:
+                cur.close()
 
 
 # Login function.
 @app.route("/users/login", methods=["GET"])
 def login_user():
-    # Making connection and cursor.
-    connection = database_connect()
-    cur = connection.cursor(dictionary=True)
+    # Making empty connection and cursor, if connection and cursor won't be created then in finally won't be error.
+    connection = None
+    cur = None
 
     # Trying to perform a database operation.
     try:
+        # Making connection and cursor.
+        connection = database_connect()
+        cur = connection.cursor(dictionary=True)
         # Assignment request body into request data variable.
         request_data = request.get_json()
         # Making query.
@@ -490,22 +522,27 @@ def login_user():
         else:
             return jsonify(result="Bad login, password or your account has not been activated"), 401
 
-    # Closing connection with database and cursor.
+    # Closing connection with database and cursor if it exists.
     finally:
-        connection.close()
-        cur.close()
+        if connection:
+            connection.close()
+            if cur:
+                cur.close()
 
 
 # Function for getting user info (protected by access_token).
 @app.route("/users/<user_id>", methods=["GET"])
 @token_required
 def get_user(user_id):
-    # Making connection and cursor as dictionary.
-    connection = database_connect()
-    cur = connection.cursor(dictionary=True)
+    # Making empty connection and cursor, if connection and cursor won't be created then in finally won't be error.
+    connection = None
+    cur = None
 
     # Trying to perform a database operation.
     try:
+        # Making connection and cursor as dictionary.
+        connection = database_connect()
+        cur = connection.cursor(dictionary=True)
         # Creating empty request_data.
         request_data = {}
         # Making query.
@@ -524,22 +561,27 @@ def get_user(user_id):
     else:
         return jsonify(result=cur.fetchall()), 200
 
-    # Closing connection with database and cursor.
+    # Closing connection with database and cursor if it exists.
     finally:
-        connection.close()
-        cur.close()
+        if connection:
+            connection.close()
+            if cur:
+                cur.close()
 
 
 # Update user function (protected by access_token).
 @app.route("/users/<user_id>", methods=["PATCH"])
 @token_required
 def update_user(user_id):
-    # Making connection and cursor.
-    connection = database_connect()
-    cur = connection.cursor(dictionary=True)
+    # Making empty connection and cursor, if connection and cursor won't be created then in finally won't be error.
+    connection = None
+    cur = None
 
     # Trying to perform a database operation.
     try:
+        # Making connection and cursor.
+        connection = database_connect()
+        cur = connection.cursor(dictionary=True)
         # Making query.
         query = """UPDATE users"""
         # Assignment request body into request data variable.
@@ -593,22 +635,27 @@ def update_user(user_id):
     else:
         return jsonify(result="Update successful."), 200
 
-    # Closing connection and cursor.
+    # Closing connection and cursor if it exists.
     finally:
-        connection.close()
-        cur.close()
+        if connection:
+            connection.close()
+            if cur:
+                cur.close()
 
 
 # Delete user function (protected by access_token).
 @app.route("/users/<user_id>", methods=["DELETE"])
 @token_required
 def delete_user(user_id):
-    # Making connection and cursor.
-    connection = database_connect()
-    cur = connection.cursor(dictionary=True)
+    # Making empty connection and cursor, if connection and cursor won't be created then in finally won't be error.
+    connection = None
+    cur = None
 
     # Trying to perform a database operation.
     try:
+        # Making connection and cursor.
+        connection = database_connect()
+        cur = connection.cursor(dictionary=True)
         # Creating empty request_data.
         request_data = {}
         # Making query.
@@ -638,10 +685,12 @@ def delete_user(user_id):
     else:
         return jsonify(result="Deletion completed successfully."), 200
 
-    # Closing connection and cursor.
+    # Closing connection and cursor if it exists.
     finally:
-        connection.close()
-        cur.close()
+        if connection:
+            connection.close()
+            if cur:
+                cur.close()
 
 
 # Main
