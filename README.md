@@ -76,8 +76,29 @@ CREATE TABLE `users` (
   UNIQUE KEY `email_UNIQUE` (`email`)
 ```
   
+```bash
+CREATE TABLE `top_scores` (
+  `top_score_id` int NOT NULL AUTO_INCREMENT,
+  `user_id` int NOT NULL,
+  `points` int NOT NULL,
+  PRIMARY KEY (`top_score_id`),
+  KEY `user_id_fk` (`user_id`),
+  CONSTRAINT `user_id_fk` FOREIGN KEY (`user_id`) REFERENCES `users` (`user_id`)
+```
 
-
+```bash
+CREATE TABLE `questions` (
+  `question_id` int NOT NULL AUTO_INCREMENT,
+  `content` varchar(120) NOT NULL,
+  `A` varchar(45) NOT NULL,
+  `B` varchar(45) NOT NULL,
+  `C` varchar(45) NOT NULL,
+  `D` varchar(45) NOT NULL,
+  `right_answer` varchar(1) NOT NULL,
+  `difficulty` int NOT NULL,
+  PRIMARY KEY (`question_id`),
+  UNIQUE KEY `content_UNIQUE` (`content`)
+```
 
 #### Instruction:
 - Download MySQL Server 8.0, install it on your computer and create a database
