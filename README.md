@@ -128,6 +128,7 @@ CREATE TABLE `questions` (
 
 ```http
   GET /questions
+  GET /users/register/check-data
 ```
 
 | Resource  | Type     | Required | Description                |
