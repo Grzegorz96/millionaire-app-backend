@@ -130,9 +130,9 @@ CREATE TABLE `questions` (
   GET /questions
 ```
 
-| Resource | Type     | Description                |
-| :-------- | :------- | :------------------------- |
-| `questions` | `string` | **Required**. Your API key |
+| Resource  | Type     | Required | Description                |
+| :-------- | :------- | :------- |:------------------------- |
+| `questions` | `string`| **Required** |  Your API key |
 
 #### Get item
 
