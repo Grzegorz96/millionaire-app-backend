@@ -30,7 +30,7 @@ The program consists of 3 modules and each of them is responsible for something 
 
 ### To run API on localhost:
 
-#### Requirements:
+##### Requirements:
 - Python 3.11
 - MySQL Server 8.0
 - Flask 2.3.2
@@ -38,23 +38,23 @@ The program consists of 3 modules and each of them is responsible for something 
 - mysql-connector-python 8.0.33
 - python-dotenv
 
-### Environment Variables:
+#### Environment Variables:
 
 To run this project, you will need to add the following environment variables to your .env file
 
-`DATABASE_HOST`
+`DATABASE_HOST`=IP or name of your host
 
-`DATABASE_USER`
+`DATABASE_USER`=Your database username
 
-`DATABASE_PASSWORD`
+`DATABASE_PASSWORD`=Your database password
 
-`DATABASE_DATABASE`
+`DATABASE_DATABASE`=The name of your database
 
-`API_SECRET_KEY`
+`API_SECRET_KEY`=Secret key for encoding and decoding your JSON Web Tokens
 
-`EMAIL_SENDER`
+`EMAIL_SENDER`=Email from which messages will be sent to users
 
-`EMAIL_SENDER_PASSWORD`
+`EMAIL_SENDER_PASSWORD`=Generated password for the given e-mail
 
 
 #### Instruction
