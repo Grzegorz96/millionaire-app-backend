@@ -124,15 +124,15 @@ CREATE TABLE `questions` (
 
 ## API Reference
 
-#### Get all items
+#### Get all questions
 
 ```http
-  GET /api/items
+  GET /questions
 ```
 
-| Parameter | Type     | Description                |
+| Resource | Type     | Description                |
 | :-------- | :------- | :------------------------- |
-| `api_key` | `string` | **Required**. Your API key |
+| `questions` | `string` | **Required**. Your API key |
 
 #### Get item
 
