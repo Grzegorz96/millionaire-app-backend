@@ -1,1 +1,108 @@
-# millionaire-app-backend
+![logo frontend](https://github.com/Grzegorz96/millionaire-app-frontend/assets/129303867/1b1610c8-d435-47a3-92be-df9ce009fef5)
+# API for MILLIONAIRE.app
+
+The API allows the user to connect to the database from the level of the frontend application. The program contains many endpoints needed for the functioning of the frontend. It also has a JSON Web Token generator, a function that protect endpoints, a function that refreshes expired access tokens and a program for automatically sending generated activation numbers to email.
+
+
+## Description of the modules
+
+The program consists of 3 modules and each of them is responsible for something else. The API.py module is responsible for receiving requests, handling them and returning answers. In addition, this module generates a JWT access token and a JWT refresh token for a newly logged-in user, refreshes expired access tokens and protects some endpoints for which an access token is required. Ie is responsible for direct operations on the MySQL database. Database_connection.py is responsible for creating the database connection required by the function in API.py. The last module Activation_numvber_sender.py is used to generate the activation code and send it to the imported email address. In order for the program to work, it additionally requires the .env environment variable. All 3 modules retrieve the necessary data and passwords from the .env file.
+
+
+## Features
+
+- Access token and refresh token generation function.
+- A function that protects endpoints against access by unauthorized persons.
+- The function of sending the generated confirmation number to the user's e-mail address.
+- The function of refreshing expired access tokens (15 minutes of validity) using an active refresh token (10 hours of validity).
+- Database CRUD functions.
+- handling various errors and returning the appropriate code status.
+
+
+
+## Technology used
+
+**Client:** 
+- Languages: Python
+- Third Party Libraries: Tkinter, Pygame, requests
+
+**Server:** 
+- Languages: Python, SQL
+- Third Party Libraries: Flask, PyJWT, mysql-connector-python, python-dotenv
+
+
+## Installation
+
+### To quickly launch the application on windows:
+- Make new directory on your computer.
+- Download millionaire-app-frontend repository:
+```bash
+ git clone https://github.com/Grzegorz96/millionaire-app-frontend.git
+```
+- Enter the directory exe_millionaire_app.
+- Run Millionaire_app.exe.
+
+### For manually launching the application on the IDE:
+#### Requirements:
+- Python 3.11
+- pygame 2.5.0
+- requests 2.31.0
+#### Instruction:
+- Make new directory on your computer.
+- Download millionaire-app-frontend repository:
+```bash
+ git clone https://github.com/Grzegorz96/millionaire-app-frontend.git
+```
+- Open the "Frontend" on your IDE.
+- Install required packages on your venv:
+
+```bash
+  pip install pygame
+  pip install requests 
+```
+- Run Main.py:
+```bash
+ py .\Main.py
+```
+Program MILLIONAIRE.app connects to the enpoints on the cloud server, you don't need to create a local server.
+
+
+## Lessons Learned
+
+While creating this project, I learned how to combine many programs. I've worked on different libraries with different technologies. I had to implement JWT tokens myself so that the frontend program could catch the returned new access tokens, overwrite the expired one in the user object and repeat the query again. I created user login and registration logic so that all processes are safe for the user. Logging in consists of 2 steps, the first is to check whether the given user is in the database, then if so, downloading his id and creating a JWT for him, the next query is a request for information about this user, using the ID and access token. Registration consists of 3 steps, the first is to check if the given user is not already in the database, the next is to check if the given email really belongs to the user by sending the user an e-mail to verify the e-mail address before registration, the last step is to place the user in the database. I think that implementing these functions took me the most time but also learned a lot. I learned to connect with the proprietary API that performs queries on the database. It also took me a long time to catch most of the bugs and handle them. I increased my skills in creating program logic. I gained knowledge about the implementation of graphic and sound files in the application.
+
+
+## Features to be implemented
+
+- The function of adding more questions from a .json file after prior validation. There is already such a function on the backend.
+- The function of resetting the password to the account via a code sent to the e-mail.
+- The function of restoring a deleted account via a code sent to an e-mail.
+
+
+## Authors
+
+- [@Grzegorz96](https://www.github.com/Grzegorz96)
+
+
+## Contact
+
+E-mail: grzesstrzeszewski@gmail.com
+
+
+## License
+
+[MIT](https://choosealicense.com/licenses/mit/)
+
+
+## Screnshoots
+
+![apka](https://github.com/Grzegorz96/millionaire-app-frontend/assets/129303867/a1fe5e2d-9e49-4e17-bfb3-f1ed88d97cec)
+![apka z oknami](https://github.com/Grzegorz96/millionaire-app-frontend/assets/129303867/58ccf70d-99da-4838-be5c-1840164cb002)
+![apka z wynikami](https://github.com/Grzegorz96/millionaire-app-frontend/assets/129303867/b07055e6-c47f-4e70-af77-8828d4a2b2fb)
+![pytania](https://github.com/Grzegorz96/millionaire-app-frontend/assets/129303867/161bd253-1113-4a90-a6b9-8469a4cc9100)
+![end panel](https://github.com/Grzegorz96/millionaire-app-frontend/assets/129303867/62011be5-f93a-448e-84e6-276d6ad7e8bc)
+![gra](https://github.com/Grzegorz96/millionaire-app-frontend/assets/129303867/d2adaff7-aa17-405a-ab40-4e8cc9db2f06)
+![aktywacja](https://github.com/Grzegorz96/millionaire-app-frontend/assets/129303867/2004f0e4-f070-441e-81fa-6a02ced31fa6)
+![uzytkownik](https://github.com/Grzegorz96/millionaire-app-frontend/assets/129303867/40a62b7b-5231-4fc8-8fa2-cb5da70a3269)
+![email](https://github.com/Grzegorz96/millionaire-app-frontend/assets/129303867/5b353fd9-2afc-4918-9471-5cda04d8b7f2)
+
