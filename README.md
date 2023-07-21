@@ -16,15 +16,10 @@ The program consists of 3 modules and each of them is responsible for something 
 - The function of sending the generated confirmation number to the user's e-mail address.
 - The function of refreshing expired access tokens (15 minutes of validity) using an active refresh token (10 hours of validity).
 - Database CRUD functions.
-- handling various errors and returning the appropriate code status.
-
+- Handling various errors and returning the appropriate code status.
 
 
 ## Technology used
-
-**Client:** 
-- Languages: Python
-- Third Party Libraries: Tkinter, Pygame, requests
 
 **Server:** 
 - Languages: Python, SQL
@@ -33,39 +28,34 @@ The program consists of 3 modules and each of them is responsible for something 
 
 ## Installation
 
-### To quickly launch the application on windows:
-- Make new directory on your computer.
-- Download millionaire-app-frontend repository:
-```bash
- git clone https://github.com/Grzegorz96/millionaire-app-frontend.git
-```
-- Enter the directory exe_millionaire_app.
-- Run Millionaire_app.exe.
+### To run API on localhost:
 
-### For manually launching the application on the IDE:
 #### Requirements:
 - Python 3.11
-- pygame 2.5.0
-- requests 2.31.0
-#### Instruction:
+- Flask 2.3.2
+- PyJWT 2.7.0
+- mysql-connector-python 8.0.33
+- python-dotenv
+
+#### Instruction
 - Make new directory on your computer.
-- Download millionaire-app-frontend repository:
+- Download millionaire-app-backend repository:
 ```bash
- git clone https://github.com/Grzegorz96/millionaire-app-frontend.git
+ git clone https://github.com/Grzegorz96/millionaire-app-backend.git
 ```
-- Open the "Frontend" on your IDE.
+- Create .env file in your Backend folder
 - Install required packages on your venv:
 
 ```bash
-  pip install pygame
-  pip install requests 
+  pip install Flask
+  pip install PyJWT
+  pip install mysql-connector-python
+  pip install python-dotenv 
 ```
-- Run Main.py:
+- Run API.py:
 ```bash
- py .\Main.py
+ py .\API.py
 ```
-Program MILLIONAIRE.app connects to the enpoints on the cloud server, you don't need to create a local server.
-
 
 ## Lessons Learned
 
