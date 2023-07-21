@@ -40,7 +40,7 @@ The program consists of 3 modules and each of them is responsible for something 
 - mysql-connector-python 8.0.33
 - python-dotenv
 
-#### Environment Variables:
+##### Environment Variables:
 
 To run this project, you will need to add the following environment variables to your .env file
 
@@ -58,15 +58,37 @@ To run this project, you will need to add the following environment variables to
 
 `EMAIL_SENDER_PASSWORD`=Generated password for the given e-mail
 
+##### Tables for database:
+- users
+- top_scores
+- questions
+```bash
+CREATE TABLE `users` (
+  `user_id` int NOT NULL AUTO_INCREMENT,
+  `first_name` varchar(45) NOT NULL,
+  `last_name` varchar(45) NOT NULL,
+  `login` varchar(45) NOT NULL,
+  `password` varchar(45) NOT NULL,
+  `email` varchar(45) NOT NULL,
+  `active_flag` tinyint NOT NULL DEFAULT '1',
+  PRIMARY KEY (`user_id`),
+  UNIQUE KEY `login_UNIQUE` (`login`),
+  UNIQUE KEY `email_UNIQUE` (`email`)
+```
+  
+
+
 
 #### Instruction:
-- Download MySQL Server 8.0 and install it on your computer (+ optional mysql workbench for easier database work)
+- Download MySQL Server 8.0, install it on your computer and create a database
+- Optional install mysql workbench for easier database work
 - Download millionaire-app-backend repository:
 ```bash
  git clone https://github.com/Grzegorz96/millionaire-app-backend.git
 ```
 - Create .env file in your Backend folder
 - Add the required environment variables to the .env file
+- Create the required tables in the database
 - Install required packages on your venv:
 ```bash
   pip install Flask
