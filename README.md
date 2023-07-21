@@ -57,7 +57,7 @@ To run this project, you will need to add the following environment variables to
 `EMAIL_SENDER_PASSWORD`=Generated password for the given e-mail
 
 
-#### Instruction
+#### Instruction:
 - Download MySQL Server 8.0 and install it on your computer (+ optional mysql workbench for easier database work)
 - Download millionaire-app-backend repository:
 ```bash
