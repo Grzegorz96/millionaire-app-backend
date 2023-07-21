@@ -45,11 +45,17 @@ The program consists of 3 modules and each of them is responsible for something 
 To run this project, you will need to add the following environment variables to your .env file
 
 `DATABASE_HOST`=IP or name of your host
+
 `DATABASE_USER`=Your database username
+
 `DATABASE_PASSWORD`=Your database password
+
 `DATABASE_DATABASE`=The name of your database
+
 `API_SECRET_KEY`=Secret key for encoding and decoding your JSON Web Tokens
+
 `EMAIL_SENDER`=Email from which messages will be sent to users
+
 `EMAIL_SENDER_PASSWORD`=Generated password for the given e-mail
 
 
