@@ -30,7 +30,7 @@ The program consists of 3 modules and each of them is responsible for something 
 
 ### To run API on localhost:
 
-##### Requirements:
+#### Requirements:
 - Python 3.11
 - MySQL Server 8.0
 - Flask 2.3.2
@@ -64,6 +64,7 @@ To run this project, you will need to add the following environment variables to
  git clone https://github.com/Grzegorz96/millionaire-app-backend.git
 ```
 - Create .env file in your Backend folder
+- Add the required environment variables to the .env file
 - Install required packages on your venv:
 ```bash
   pip install Flask
