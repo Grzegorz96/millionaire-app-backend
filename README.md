@@ -24,6 +24,8 @@ The program consists of 3 modules and each of them is responsible for something 
 **Server:** 
 - Languages: Python, SQL
 - Third Party Libraries: Flask, PyJWT, mysql-connector-python, python-dotenv
+- Hosting for API: www.pythonanywhere.com
+- Hosting for MySQL database: www.pythonanywhere.com
 
 
 ## Installation
@@ -43,17 +45,11 @@ The program consists of 3 modules and each of them is responsible for something 
 To run this project, you will need to add the following environment variables to your .env file
 
 `DATABASE_HOST`=IP or name of your host
-
 `DATABASE_USER`=Your database username
-
 `DATABASE_PASSWORD`=Your database password
-
 `DATABASE_DATABASE`=The name of your database
-
 `API_SECRET_KEY`=Secret key for encoding and decoding your JSON Web Tokens
-
 `EMAIL_SENDER`=Email from which messages will be sent to users
-
 `EMAIL_SENDER_PASSWORD`=Generated password for the given e-mail
 
 
@@ -77,6 +73,33 @@ To run this project, you will need to add the following environment variables to
  py .\API.py
 ```
 
+## API Reference
+
+#### Get all items
+
+```http
+  GET /api/items
+```
+
+| Parameter | Type     | Description                |
+| :-------- | :------- | :------------------------- |
+| `api_key` | `string` | **Required**. Your API key |
+
+#### Get item
+
+```http
+  GET /api/items/${id}
+```
+
+| Parameter | Type     | Description                       |
+| :-------- | :------- | :-------------------------------- |
+| `id`      | `string` | **Required**. Id of item to fetch |
+
+#### add(num1, num2)
+
+Takes two numbers and returns the sum.
+
+
 ## Lessons Learned
 
 While creating this project, I learned how to combine many programs. I've worked on different libraries with different technologies. I had to implement JWT tokens myself so that the frontend program could catch the returned new access tokens, overwrite the expired one in the user object and repeat the query again. I created user login and registration logic so that all processes are safe for the user. Logging in consists of 2 steps, the first is to check whether the given user is in the database, then if so, downloading his id and creating a JWT for him, the next query is a request for information about this user, using the ID and access token. Registration consists of 3 steps, the first is to check if the given user is not already in the database, the next is to check if the given email really belongs to the user by sending the user an e-mail to verify the e-mail address before registration, the last step is to place the user in the database. I think that implementing these functions took me the most time but also learned a lot. I learned to connect with the proprietary API that performs queries on the database. It also took me a long time to catch most of the bugs and handle them. I increased my skills in creating program logic. I gained knowledge about the implementation of graphic and sound files in the application.
@@ -84,9 +107,7 @@ While creating this project, I learned how to combine many programs. I've worked
 
 ## Features to be implemented
 
-- The function of adding more questions from a .json file after prior validation. There is already such a function on the backend.
-- The function of resetting the password to the account via a code sent to the e-mail.
-- The function of restoring a deleted account via a code sent to an e-mail.
+- Additional data validation on the backend. At the moment, data validation takes place only on the frontend.
 
 
 ## Authors
@@ -105,14 +126,3 @@ E-mail: grzesstrzeszewski@gmail.com
 
 
 ## Screnshoots
-
-![apka](https://github.com/Grzegorz96/millionaire-app-frontend/assets/129303867/a1fe5e2d-9e49-4e17-bfb3-f1ed88d97cec)
-![apka z oknami](https://github.com/Grzegorz96/millionaire-app-frontend/assets/129303867/58ccf70d-99da-4838-be5c-1840164cb002)
-![apka z wynikami](https://github.com/Grzegorz96/millionaire-app-frontend/assets/129303867/b07055e6-c47f-4e70-af77-8828d4a2b2fb)
-![pytania](https://github.com/Grzegorz96/millionaire-app-frontend/assets/129303867/161bd253-1113-4a90-a6b9-8469a4cc9100)
-![end panel](https://github.com/Grzegorz96/millionaire-app-frontend/assets/129303867/62011be5-f93a-448e-84e6-276d6ad7e8bc)
-![gra](https://github.com/Grzegorz96/millionaire-app-frontend/assets/129303867/d2adaff7-aa17-405a-ab40-4e8cc9db2f06)
-![aktywacja](https://github.com/Grzegorz96/millionaire-app-frontend/assets/129303867/2004f0e4-f070-441e-81fa-6a02ced31fa6)
-![uzytkownik](https://github.com/Grzegorz96/millionaire-app-frontend/assets/129303867/40a62b7b-5231-4fc8-8fa2-cb5da70a3269)
-![email](https://github.com/Grzegorz96/millionaire-app-frontend/assets/129303867/5b353fd9-2afc-4918-9471-5cda04d8b7f2)
-
