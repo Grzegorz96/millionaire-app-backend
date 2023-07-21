@@ -6,7 +6,7 @@ The API allows the user to connect to the database from the level of the fronten
 
 ## Description of the modules
 
-The program consists of 3 modules and each of them is responsible for something else. The API.py module is responsible for receiving requests, handling them and returning answers. In addition, this module generates a JWT access token and a JWT refresh token for a newly logged-in user, refreshes expired access tokens and protects some endpoints for which an access token is required. Ie is responsible for direct operations on the MySQL database. Database_connection.py is responsible for creating the database connection required by the function in API.py. The last module Activation_numvber_sender.py is used to generate the activation code and send it to the imported email address. In order for the program to work, it additionally requires the .env environment variable. All 3 modules retrieve the necessary data and passwords from the .env file.
+The program consists of 3 modules and each of them is responsible for something else. The API.py module is responsible for receiving requests, handling them and returning answers. In addition, this module generates a JWT access token and a JWT refresh token for a newly logged-in user, refreshes expired access tokens and protects some endpoints for which an access token is required. Ie is responsible for direct operations on the MySQL database. Database_connection.py is responsible for creating the database connection required by the function in API.py. The last module Activation_numvber_sender.py is used to generate the activation code and send it to the imported email address. In order for the program to work, it additionally requires the .env environment variables. All 3 modules retrieve the necessary data and passwords from the .env file.
 
 
 ## Features
@@ -32,20 +32,39 @@ The program consists of 3 modules and each of them is responsible for something 
 
 #### Requirements:
 - Python 3.11
+- MySQL Server 8.0
 - Flask 2.3.2
 - PyJWT 2.7.0
 - mysql-connector-python 8.0.33
 - python-dotenv
 
+### Environment Variables:
+
+To run this project, you will need to add the following environment variables to your .env file
+
+`DATABASE_HOST`
+
+`DATABASE_USER`
+
+`DATABASE_PASSWORD`
+
+`DATABASE_DATABASE`
+
+`API_SECRET_KEY`
+
+`EMAIL_SENDER`
+
+`EMAIL_SENDER_PASSWORD`
+
+
 #### Instruction
-- Make new directory on your computer.
+- Download MySQL Server 8.0 and install it on your computer (+ optional mysql workbench for easier database work)
 - Download millionaire-app-backend repository:
 ```bash
  git clone https://github.com/Grzegorz96/millionaire-app-backend.git
 ```
 - Create .env file in your Backend folder
 - Install required packages on your venv:
-
 ```bash
   pip install Flask
   pip install PyJWT
