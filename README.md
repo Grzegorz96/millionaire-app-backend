@@ -124,30 +124,53 @@ CREATE TABLE `questions` (
 
 ## API Reference
 
-#### Get all questions
+#### HTTP GET METHODS
 
 ```http
   GET /questions
   GET /users/register/check-data
+  GET /scores
+  GET /users/login
+  GET /users/<user_id>  
 ```
 
 | Resource  | Type     | Required | Description                |
 | :-------- | :------- | :------- |:------------------------- |
 | `questions` | `string`| **Required** |  Your API key |
 
-#### Get item
+#### HTTP POST METHODS
 
 ```http
-  GET /api/items/${id}
+  POST /users/send-activation-number
+  POST /users/register
+  POST /scores
+  POST /questions
+  GET /users/<user_id>  
 ```
 
-| Parameter | Type     | Description                       |
-| :-------- | :------- | :-------------------------------- |
-| `id`      | `string` | **Required**. Id of item to fetch |
+| Resource  | Type     | Required | Description                |
+| :-------- | :------- | :------- |:------------------------- |
+| `questions` | `string`| **Required** |  Your API key |
 
-#### add(num1, num2)
+#### HTTP PATCH METHODS
 
-Takes two numbers and returns the sum.
+```http
+  PATCH /users/<user_id>
+```
+
+| Resource  | Type     | Required | Description                |
+| :-------- | :------- | :------- |:------------------------- |
+| `questions` | `string`| **Required** |  Your API key |
+
+#### HTTP DELETE METHODS
+
+```http
+  DELETE /users/<user_id>
+```
+
+| Resource  | Type     | Required | Description                |
+| :-------- | :------- | :------- |:------------------------- |
+| `questions` | `string`| **Required** |  Your API key |
 
 
 ## Lessons Learned
