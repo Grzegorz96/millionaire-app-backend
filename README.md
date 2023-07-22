@@ -44,17 +44,17 @@ The program consists of 3 modules and each of them is responsible for something 
 
 ##### Environment Variables:
 
-To run this project, you will need to add the following environment variables to your .env file
+To run this project, you will need to add the following environment variables to your .env file:
 
-`DATABASE_HOST`=IP or name of your host (127.0.0.1 or localhost)
+`DATABASE_HOST`=IP or name of your host (127.0.0.1 or localhost).
 
-`DATABASE_USER`=Your database username
+`DATABASE_USER`=Your database username.
 
-`DATABASE_PASSWORD`=Your database password
+`DATABASE_PASSWORD`=Your database password.
 
-`DATABASE_DATABASE`=The name of your database
+`DATABASE_DATABASE`=The name of your database.
 
-`API_SECRET_KEY`=Secret key for encoding and decoding your JSON Web Tokens
+`API_SECRET_KEY`=Secret key for encoding and decoding your JSON Web Tokens.
 
 ```bash
 # It is how to create your own SECRET_KEY variable.
