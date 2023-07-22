@@ -56,6 +56,11 @@ To run this project, you will need to add the following environment variables to
 
 `API_SECRET_KEY`=Secret key for encoding and decoding your JSON Web Tokens
 
+ - ```bash
+import uuid
+SECRET_KEY = uuid.uuid4().hex
+```
+
 `EMAIL_SENDER`=Email from which messages will be sent to users
 
 `EMAIL_SENDER_PASSWORD`=Generated password for the given e-mail
