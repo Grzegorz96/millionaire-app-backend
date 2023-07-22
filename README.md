@@ -134,7 +134,7 @@ CREATE TABLE `questions` (
 ```bash
  app.run(debug=True, port=(set your own port))
 ```
-- If you want connect MILLIONAIRE.app program with local backend u need to change endpoints in [millionaire-app-frontend](https://github.com/Grzegorz96/millionaire-app-frontend)/Backend_requests.py on:
+- If you want connect MILLIONAIRE.app program with local backend u need to change endpoints in [millionaire-app-frontend/Backend_requests.py](https://github.com/Grzegorz96/millionaire-app-frontend/blob/master/Backend_requests.py) on:
 ```bash
  url = "http://localhost:3000/endpoint"
 ```
