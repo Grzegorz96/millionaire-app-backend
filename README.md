@@ -70,6 +70,7 @@ API_SECRET_KEY = uuid.uuid4().hex
 - users
 - top_scores
 - questions
+Login to your database and then copy and paste this text into your MySQL Workbench or Mysql Console.
 ```bash
 CREATE TABLE `users` (
   `user_id` int NOT NULL AUTO_INCREMENT,
