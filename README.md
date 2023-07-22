@@ -154,7 +154,7 @@ CREATE TABLE `questions` (
 | Resource  | Type     | Required | Description                |
 | :-------- | :------- | :------- |:------------------------- |
 | `questions` | `string`| **Required** |  Your API key |
-
+| `questions` | `string`| **Required** |  Your API key |
 #### HTTP POST METHODS
 
 ```http
