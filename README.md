@@ -56,7 +56,7 @@ To run this project, you will need to add the following environment variables to
 
 `API_SECRET_KEY`=Secret key for encoding and decoding your JSON Web Tokens
 
- - ```bash
+```bash
 import uuid
 SECRET_KEY = uuid.uuid4().hex
 ```
