@@ -142,14 +142,28 @@ CREATE TABLE `questions` (
 ## API Reference
 
 #### HTTP GET METHODS
-
 ```http
   GET /questions
+```
+| Resource  | Type     | Required | Description                |
+| :-------- | :------- | :------- |:------------------------- |
+| `questions` | `string`| **Required** |  Getting all questions from questions table |
+
+
+```http
   GET /users/register/check-data
+```
+```http
   GET /scores
+```
+```http
   GET /users/login
+```
+```http
   GET /users/<user_id>  
 ```
+
+
 
 | Resource  | Type     | Required | Description                |
 | :-------- | :------- | :------- |:------------------------- |
