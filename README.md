@@ -262,6 +262,3 @@ E-mail: grzesstrzeszewski@gmail.com
 ![score](https://github.com/Grzegorz96/millionaire-app-backend/assets/129303867/668705e1-5ed0-4d93-bdfa-b9d1eaa42643)
 ##### Email sent from the email sender
 ![email](https://github.com/Grzegorz96/millionaire-app-backend/assets/129303867/9ad0ba8e-39bc-45b9-acda-4990033d56e4)
-
-
-
