@@ -59,7 +59,7 @@ To run this project, you will need to add the following environment variables to
 ```bash
 # It is how to create your own SECRET_KEY variable.
 import uuid
-SECRET_KEY = uuid.uuid4().hex
+API_SECRET_KEY = uuid.uuid4().hex
 ```
 
 `EMAIL_SENDER`=Email from which messages will be sent to users
