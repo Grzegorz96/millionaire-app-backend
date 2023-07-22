@@ -167,9 +167,16 @@ CREATE TABLE `questions` (
 ```http
   GET /users/login
 ```
+| Resource  | Type     | Description                |
+| :-------- | :------- | :------------------------- |
+| `users`   | `string` | **Required** Retrieving generated JWT tokens and user id |
+
 ```http
   GET /users/<user_id>  
 ```
+| Resource  | Type     | Description                | Subresource  | Type     | Description                |
+| :-------- | :------- | :------------------------- | :--------    | :------- | :------------------------- |
+| `users `  | `string` | **Required** Getting user data with given id | `user_id`   | `string` | **Required** ID to specify the user |
 
 
 
