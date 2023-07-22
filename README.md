@@ -230,7 +230,7 @@ CREATE TABLE `questions` (
 
 ## Lessons Learned
 
-While creating the project, I learned how to create a rest API. I have knowledge about working with JSON Web Tokens and I know how to send e-mails automatically. The challenge was also to implement the project on a web hosting platform so that everything would work flawlessly. I consolidated my knowledge of the SQL language and working with databases. I learned how to combine many programs using different technologies. I expanded my knowledge by working with .env files and learned a lot about API, HTTP, SMTP, Ipv4, localhost and computer networks in general.
+While creating the project, i learned how to create a rest API. I have knowledge about working with JSON Web Tokens and I know how to send e-mails automatically. The challenge was also to implement the project on a web hosting platform so that everything would work flawlessly. I consolidated my knowledge of the SQL language and working with databases. I learned how to combine many programs using different technologies. I expanded my knowledge by working with .env files and learned a lot about API, HTTP, SMTP, Ipv4, localhost and computer networks in general.
 
 
 ## Features to be implemented
