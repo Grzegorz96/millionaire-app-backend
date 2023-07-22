@@ -145,16 +145,16 @@ CREATE TABLE `questions` (
 ```http
   GET /questions
 ```
-| Resource  | Type     | Required | Description                |
-| :-------- | :------- | :------- |:------------------------- |
-| `questions` | `string`| **Required** |  Getting all questions from questions table |
+| Resource    | Type    | Description                |
+| :--------   | :-------| :------------------------- |
+| `questions` | `string`| **Required** Getting all questions from questions table |
 
 ```http
   GET /users/register/check-data
 ```
-| Resource  | Type     | Required | Description                |
-| :-------- | :------- | :------- |:------------------------- |
-| `users` | `string`| **Required** |  Checking if the given user is not already in the database  |
+| Resource  | Type     | Description                |
+| :-------- | :------- | :------------------------- |
+| `users`   | `string` | **Required** Checking if the given user is not already in the database  |
 
 ```http
   GET /scores
@@ -168,13 +168,13 @@ CREATE TABLE `questions` (
 
 
 
-| Resource  | Type     | Required | Description                |
-| :-------- | :------- | :------- |:------------------------- |
-| `questions` | `string`| **Required** |  Your API key |
-| `questions` | `string`| **Required** |  Your API key |
-| `questions` | `string`| **Required** |  Your API key |
-| `questions` | `string`| **Required** |  Your API key |
-| `questions` | `string`| **Required** |  Your API key |
+| Resource    | Type     | Description               |
+| :--------   | :------- |:------------------------- |
+| `questions` | `string` | **Required** Your API key |
+| `questions` | `string` | **Required** Your API key |
+| `questions` | `string` | **Required** Your API key |
+| `questions` | `string` | **Required** Your API key |
+| `questions` | `string` | **Required** Your API key |
 #### HTTP POST METHODS
 
 ```http
