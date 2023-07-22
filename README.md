@@ -155,6 +155,9 @@ CREATE TABLE `questions` (
 | :-------- | :------- | :------- |:------------------------- |
 | `questions` | `string`| **Required** |  Your API key |
 | `questions` | `string`| **Required** |  Your API key |
+| `questions` | `string`| **Required** |  Your API key |
+| `questions` | `string`| **Required** |  Your API key |
+| `questions` | `string`| **Required** |  Your API key |
 #### HTTP POST METHODS
 
 ```http
