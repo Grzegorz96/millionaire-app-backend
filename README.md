@@ -149,10 +149,13 @@ CREATE TABLE `questions` (
 | :-------- | :------- | :------- |:------------------------- |
 | `questions` | `string`| **Required** |  Getting all questions from questions table |
 
-
 ```http
   GET /users/register/check-data
 ```
+| Resource  | Type     | Required | Description                |
+| :-------- | :------- | :------- |:------------------------- |
+| `users` | `string`| **Required** |  Checking if the given user is not already in the database  |
+
 ```http
   GET /scores
 ```
