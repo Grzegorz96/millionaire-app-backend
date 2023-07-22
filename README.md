@@ -142,6 +142,7 @@ CREATE TABLE `questions` (
 ## API Reference
 
 #### HTTP GET METHODS
+
 ```http
   GET /questions
 ```
@@ -163,7 +164,6 @@ CREATE TABLE `questions` (
 | :-------- | :------- | :------------------------- | :-------- | :------- | :------------------------- |
 | `scores`  | `string` | **Required** Getting users with their points from the database | `limit`   | `string` | **Not Required** Specifying the limit of downloaded records |
 
-
 ```http
   GET /users/login
 ```
@@ -174,52 +174,57 @@ CREATE TABLE `questions` (
 ```http
   GET /users/<user_id>  
 ```
-| Resource  | Type     | Description                | Subresource  | Type     | Description                |
-| :-------- | :------- | :------------------------- | :--------    | :------- | :------------------------- |
+| Resource  | Type     | Description                | Sub-resource  | Type     | Description                |
+| :-------- | :------- | :------------------------- | :--------     | :------- | :------------------------- |
 | `users `  | `string` | **Required** Getting user data with given id | `user_id`   | `string` | **Required** ID to specify the user |
 
-
-
-| Resource    | Type     | Description               |
-| :--------   | :------- |:------------------------- |
-| `questions` | `string` | **Required** Your API key |
-| `questions` | `string` | **Required** Your API key |
-| `questions` | `string` | **Required** Your API key |
-| `questions` | `string` | **Required** Your API key |
-| `questions` | `string` | **Required** Your API key |
 #### HTTP POST METHODS
 
 ```http
   POST /users/send-activation-number
-  POST /users/register
-  POST /scores
-  POST /questions
-  GET /users/<user_id>  
 ```
+| Resource | Type    | Description                |
+| :--------| :-------| :------------------------- |
+| `users`  | `string`| **Required** Sending an e-mail to the address provided in the request body |
 
-| Resource  | Type     | Required | Description                |
-| :-------- | :------- | :------- |:------------------------- |
-| `questions` | `string`| **Required** |  Your API key |
+```http
+  POST /users/register
+```
+| Resource | Type    | Description                |
+| :--------| :-------| :------------------------- |
+| `users`  | `string`| **Required** Inserting the given user data into a table in the database |
+
+```http
+  POST /scores
+```
+| Resource | Type    | Description                |
+| :--------| :-------| :------------------------- |
+| `scores` | `string`| **Required** Inserting points for a specific player in a table in the database |
+
+```http
+  POST /questions
+```
+| Resource    | Type    | Description                |
+| :--------   | :-------| :------------------------- |
+| `questions` | `string`| **Required** Inserting questions into a table in the database |
 
 #### HTTP PATCH METHODS
 
 ```http
   PATCH /users/<user_id>
 ```
-
-| Resource  | Type     | Required | Description                |
-| :-------- | :------- | :------- |:------------------------- |
-| `questions` | `string`| **Required** |  Your API key |
+| Resource  | Type     | Description                | Sub-resource  | Type     | Description                |
+| :-------- | :------- | :------------------------- | :--------     | :------- | :------------------------- |
+| `users `  | `string` | **Required** Changing the user's data with the given id | `user_id`   | `string` | **Required** ID to specify the user |
 
 #### HTTP DELETE METHODS
 
 ```http
   DELETE /users/<user_id>
 ```
-
-| Resource  | Type     | Required | Description                |
-| :-------- | :------- | :------- |:------------------------- |
-| `questions` | `string`| **Required** |  Your API key |
+| Resource  | Type     | Description                | Sub-resource  | Type     | Description                |
+| :-------- | :------- | :------------------------- | :--------     | :------- | :------------------------- |
+| `users `  | `string` | **Required** Deleting a user with a given id | `user_id`   | `string` | **Required** ID to specify the user |
 
 
 ## Lessons Learned
