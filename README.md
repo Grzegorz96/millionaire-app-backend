@@ -46,7 +46,7 @@ The program consists of 3 modules and each of them is responsible for something 
 
 To run this project, you will need to add the following environment variables to your .env file
 
-`DATABASE_HOST`=IP or name of your host
+`DATABASE_HOST`=IP or name of your host (127.0.0.1 or localhost)
 
 `DATABASE_USER`=Your database username
 
@@ -64,7 +64,7 @@ API_SECRET_KEY = uuid.uuid4().hex
 
 `EMAIL_SENDER`=Email from which messages will be sent to users
 
-`EMAIL_SENDER_PASSWORD`=Generated password for the given e-mail
+`EMAIL_SENDER_PASSWORD`=Generated password for the given e-mail, in gmail u have to turn on 2 step verification to can generate 16 characters password for your applications
 
 ##### Tables for database:
 - users
@@ -112,13 +112,13 @@ CREATE TABLE `questions` (
 #### Instruction:
 - Download MySQL Server 8.0, install it on your computer and create a database
 - Optional install mysql workbench for easier database work
+- Create the required tables in the database
 - Download millionaire-app-backend repository:
 ```bash
  git clone https://github.com/Grzegorz96/millionaire-app-backend.git
 ```
-- Create .env file in your Backend folder
+- Create .env file in your millionaire-app-backend folder
 - Add the required environment variables to the .env file
-- Create the required tables in the database
 - Install required packages on your venv:
 ```bash
   pip install Flask
@@ -129,6 +129,14 @@ CREATE TABLE `questions` (
 - Run API.py:
 ```bash
  py .\API.py
+```
+- Now your program run on port localhost:3000 u can change port by:
+```bash
+ app.run(debug=True, port=(set your own port))
+```
+- If you want connect MILLIONAIRE.app program with local backend u need to change endpoints in millionaire-app-frontend/Backend_requests.py on:
+```bash
+ url = "http://localhost:3000/endpoint"
 ```
 
 ## API Reference
