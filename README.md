@@ -139,6 +139,7 @@ CREATE TABLE `questions` (
  url = "http://localhost:3000/endpoint"
 ```
 
+
 ## API Reference
 
 #### HTTP GET METHODS
@@ -229,7 +230,7 @@ CREATE TABLE `questions` (
 
 ## Lessons Learned
 
-While creating this project, I learned how to combine many programs. I've worked on different libraries with different technologies. I had to implement JWT tokens myself so that the frontend program could catch the returned new access tokens, overwrite the expired one in the user object and repeat the query again. I created user login and registration logic so that all processes are safe for the user. Logging in consists of 2 steps, the first is to check whether the given user is in the database, then if so, downloading his id and creating a JWT for him, the next query is a request for information about this user, using the ID and access token. Registration consists of 3 steps, the first is to check if the given user is not already in the database, the next is to check if the given email really belongs to the user by sending the user an e-mail to verify the e-mail address before registration, the last step is to place the user in the database. I think that implementing these functions took me the most time but also learned a lot. I learned to connect with the proprietary API that performs queries on the database. It also took me a long time to catch most of the bugs and handle them. I increased my skills in creating program logic. I gained knowledge about the implementation of graphic and sound files in the application.
+While creating the project, I learned how to create a rest API. I have knowledge about working with JSON Web Tokens and I know how to send e-mails automatically. The challenge was also to implement the project on a web hosting platform so that everything would work flawlessly. I consolidated my knowledge of the SQL language and working with databases. I learned how to combine many programs using different technologies. I expanded my knowledge by working with .env files and learned a lot about API, HTTP, SMTP, Ipv4, localhost and computer networks in general.
 
 
 ## Features to be implemented
@@ -253,3 +254,9 @@ E-mail: grzesstrzeszewski@gmail.com
 
 
 ## Screnshoots
+
+![user](https://github.com/Grzegorz96/millionaire-app-backend/assets/129303867/a93aac89-229d-44f5-9aaa-0b34e3973d43)
+![pytania](https://github.com/Grzegorz96/millionaire-app-backend/assets/129303867/51c53bf2-545a-40e2-920f-96ec5170343d)
+![score](https://github.com/Grzegorz96/millionaire-app-backend/assets/129303867/668705e1-5ed0-4d93-bdfa-b9d1eaa42643)
+
+
