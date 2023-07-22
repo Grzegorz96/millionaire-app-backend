@@ -157,8 +157,13 @@ CREATE TABLE `questions` (
 | `users`   | `string` | **Required** Checking if the given user is not already in the database  |
 
 ```http
-  GET /scores
+  GET /scores/?limit=
 ```
+| Resource  | Type     | Description                | Parametr  | Type     | Description                |
+| :-------- | :------- | :------------------------- | :-------- | :------- | :------------------------- |
+| `scores`  | `string` | **Required** Getting users with their points from the database | `limit`   | `string` | **Not Required** Specifying the limit of downloaded records |
+
+
 ```http
   GET /users/login
 ```
