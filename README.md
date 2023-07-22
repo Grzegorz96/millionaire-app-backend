@@ -110,15 +110,15 @@ CREATE TABLE `questions` (
 ```
 
 #### Instruction:
-- Download MySQL Server 8.0, install it on your computer and create a database
-- Optional install mysql workbench for easier database work
-- Create the required tables in the database
+- Download MySQL Server 8.0, install it on your computer and create a database.
+- Optional install mysql workbench for easier database work.
+- Create the required tables in the database.
 - Download millionaire-app-backend repository:
 ```bash
  git clone https://github.com/Grzegorz96/millionaire-app-backend.git
 ```
-- Create .env file in your millionaire-app-backend folder
-- Add the required environment variables to the .env file
+- Create .env file in your millionaire-app-backend folder.
+- Add the required environment variables to the .env file.
 - Install required packages on your venv:
 ```bash
   pip install Flask
@@ -142,7 +142,7 @@ CREATE TABLE `questions` (
 
 ## API Reference
 
-#### HTTP GET METHODS
+#### HTTP GET METHODS:
 
 ```http
   GET /questions
@@ -179,7 +179,7 @@ CREATE TABLE `questions` (
 | :-------- | :------- | :------------------------- | :--------     | :------- | :------------------------- |
 | `users `  | `string` | **Required** Getting user data with given id | `user_id`   | `string` | **Required** ID to specify the user |
 
-#### HTTP POST METHODS
+#### HTTP POST METHODS:
 
 ```http
   POST /users/send-activation-number
@@ -209,7 +209,7 @@ CREATE TABLE `questions` (
 | :--------   | :-------| :------------------------- |
 | `questions` | `string`| **Required** Inserting questions into a table in the database |
 
-#### HTTP PATCH METHODS
+#### HTTP PATCH METHODS:
 
 ```http
   PATCH /users/<user_id>
@@ -218,7 +218,7 @@ CREATE TABLE `questions` (
 | :-------- | :------- | :------------------------- | :--------     | :------- | :------------------------- |
 | `users `  | `string` | **Required** Changing the user's data with the given id | `user_id`   | `string` | **Required** ID to specify the user |
 
-#### HTTP DELETE METHODS
+#### HTTP DELETE METHODS:
 
 ```http
   DELETE /users/<user_id>
