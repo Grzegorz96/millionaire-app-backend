@@ -149,35 +149,35 @@ CREATE TABLE `questions` (
 ```
 | Resource    | Type    | Description                |
 | :--------   | :-------| :------------------------- |
-| `questions` | `string`| **Required** Getting all questions from questions table |
+| `questions` | `string`| **Required** Getting all questions from questions table. |
 
 ```http
   GET /users/register/check-data
 ```
 | Resource  | Type     | Description                |
 | :-------- | :------- | :------------------------- |
-| `users`   | `string` | **Required** Checking if the given user is not already in the database  |
+| `users`   | `string` | **Required** Checking if the given user is not already in the database. |
 
 ```http
   GET /scores/?limit=
 ```
 | Resource  | Type     | Description                | Parametr  | Type     | Description                |
 | :-------- | :------- | :------------------------- | :-------- | :------- | :------------------------- |
-| `scores`  | `string` | **Required** Getting users with their points from the database | `limit`   | `string` | **Not Required** Specifying the limit of downloaded records |
+| `scores`  | `string` | **Required** Getting users with their points from the database. | `limit`   | `string` | **Not Required** Specifying the limit of downloaded records. |
 
 ```http
   GET /users/login
 ```
 | Resource  | Type     | Description                |
 | :-------- | :------- | :------------------------- |
-| `users`   | `string` | **Required** Retrieving generated JWT tokens and user id |
+| `users`   | `string` | **Required** Retrieving generated JWT tokens and user id. |
 
 ```http
   GET /users/<user_id>  
 ```
 | Resource  | Type     | Description                | Sub-resource  | Type     | Description                |
 | :-------- | :------- | :------------------------- | :--------     | :------- | :------------------------- |
-| `users `  | `string` | **Required** Getting user data with given id | `user_id`   | `string` | **Required** ID to specify the user |
+| `users `  | `string` | **Required** Getting user data with given id. | `user_id`   | `string` | **Required** ID to specify the user. |
 
 #### HTTP POST METHODS:
 
@@ -186,28 +186,28 @@ CREATE TABLE `questions` (
 ```
 | Resource | Type    | Description                |
 | :--------| :-------| :------------------------- |
-| `users`  | `string`| **Required** Sending an e-mail to the address provided in the request body |
+| `users`  | `string`| **Required** Sending an e-mail to the address provided in the request body. |
 
 ```http
   POST /users/register
 ```
 | Resource | Type    | Description                |
 | :--------| :-------| :------------------------- |
-| `users`  | `string`| **Required** Inserting the given user data into a table in the database |
+| `users`  | `string`| **Required** Inserting the given user data into a table in the database. |
 
 ```http
   POST /scores
 ```
 | Resource | Type    | Description                |
 | :--------| :-------| :------------------------- |
-| `scores` | `string`| **Required** Inserting points for a specific player in a table in the database |
+| `scores` | `string`| **Required** Inserting points for a specific player in a table in the database. |
 
 ```http
   POST /questions
 ```
 | Resource    | Type    | Description                |
 | :--------   | :-------| :------------------------- |
-| `questions` | `string`| **Required** Inserting questions into a table in the database |
+| `questions` | `string`| **Required** Inserting questions into a table in the database. |
 
 #### HTTP PATCH METHODS:
 
@@ -216,7 +216,7 @@ CREATE TABLE `questions` (
 ```
 | Resource  | Type     | Description                | Sub-resource  | Type     | Description                |
 | :-------- | :------- | :------------------------- | :--------     | :------- | :------------------------- |
-| `users `  | `string` | **Required** Changing the user's data with the given id | `user_id`   | `string` | **Required** ID to specify the user |
+| `users `  | `string` | **Required** Changing the user's data with the given id. | `user_id`   | `string` | **Required** ID to specify the user. |
 
 #### HTTP DELETE METHODS:
 
@@ -225,7 +225,7 @@ CREATE TABLE `questions` (
 ```
 | Resource  | Type     | Description                | Sub-resource  | Type     | Description                |
 | :-------- | :------- | :------------------------- | :--------     | :------- | :------------------------- |
-| `users `  | `string` | **Required** Deleting a user with a given id | `user_id`   | `string` | **Required** ID to specify the user |
+| `users `  | `string` | **Required** Deleting a user with a given id. | `user_id`   | `string` | **Required** ID to specify the user. |
 
 
 ## Lessons Learned
