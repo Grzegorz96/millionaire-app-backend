@@ -33,6 +33,8 @@ The program consists of 3 modules and each of them is responsible for something 
 ### To run API on localhost:
 
 #### Requirements:
+
+##### Programs and libraries:
 - Python 3.11
 - MySQL Server 8.0
 - Flask 2.3.2
