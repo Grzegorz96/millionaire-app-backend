@@ -44,7 +44,7 @@ The program consists of 3 modules and each of them is responsible for something 
 
 ##### Environment Variables:
 
-To run this project, you will need to add the following environment variables to your .env file:
+###### To run this project, you will need to add the following environment variables to your .env file:
 
 `DATABASE_HOST`=IP or name of your host (127.0.0.1 or localhost).
 
