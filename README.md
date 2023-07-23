@@ -67,7 +67,7 @@ API_SECRET_KEY = uuid.uuid4().hex
 `EMAIL_SENDER_PASSWORD`=Generated password for the given e-mail, in gmail u have to [turn on 2 step verification](https://myaccount.google.com/signinoptions/two-step-verification/enroll-welcome) to can generate 16 characters password for your applications. 
 
 ###### Create & use app passwords
-####### Important: To create an app password, you need 2-Step Verification on your Google Account.
+###### Important: To create an app password, you need 2-Step Verification on your Google Account.
 
 - ###### Go to your Google Account.
 - Select Security.
