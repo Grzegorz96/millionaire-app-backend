@@ -64,7 +64,7 @@ API_SECRET_KEY = uuid.uuid4().hex
 
 `EMAIL_SENDER`=The email that will send messages to users.
 
-`EMAIL_SENDER_PASSWORD`=Generated password for the given e-mail, in gmail u have to [turn on 2 step verification](https://myaccount.google.com/signinoptions/two-step-verification/enroll-welcome) to can generate 16 characters password for your applications: 
+`EMAIL_SENDER_PASSWORD`=Generated password for the given e-mail, in gmail u have to [turn on 2 step verification](https://myaccount.google.com/signinoptions/two-step-verification/enroll-welcome), then: 
 - ###### Go to your Google Account.
 - ###### Select Security.
 - ###### Under "Signing in to Google," select 2-Step Verification.
