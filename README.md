@@ -115,7 +115,7 @@ INSERT INTO `questions` VALUES (1,'Sport wodny uprawiany na desce z żaglem to: 
 #### Instruction:
 - Download MySQL Server 8.0, install it on your computer and create a database.
 - Optional install mysql workbench for easier database work.
-- Create the required tables in the database.
+- Create the required tables and add questions into questions database.
 - Download millionaire-app-backend repository:
 ```bash
  git clone https://github.com/Grzegorz96/millionaire-app-backend.git
