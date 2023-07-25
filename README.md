@@ -1,7 +1,7 @@
 ![logo frontend](https://github.com/Grzegorz96/millionaire-app-frontend/assets/129303867/1b1610c8-d435-47a3-92be-df9ce009fef5)
 # API for MILLIONAIRE.app
 
-The API allows the user to connect to the database from the level of the frontend application. The program contains many endpoints needed for the functioning of the frontend. It also has a JSON Web Token generator, a function that protect endpoints, a function that refreshes expired access tokens and a program for automatically sending generated activation numbers to email.
+The API allows the user to connect to the database from the level of the frontend application. The program contains many endpoints needed for the functioning of the frontend. It also has a JSON Web Token generator, a function that protect endpoints, a function that refreshes expired access tokens and a program for automatically sending generated activation numbers to email. The program can be run on both Windows and Linux.
 
 
 ## Description of the modules
