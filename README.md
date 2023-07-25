@@ -35,7 +35,7 @@ The program consists of 3 modules and each of them is responsible for something 
 #### Requirements:
 
 ##### Programs and libraries:
-- Python 3.11
+- Python 3.11.1
 - MySQL Server 8.0
 - Flask 2.3.2
 - PyJWT 2.7.0
