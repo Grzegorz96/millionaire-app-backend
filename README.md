@@ -40,7 +40,7 @@ The program consists of 3 modules and each of them is responsible for something 
 - Flask 2.3.2
 - PyJWT 2.7.0
 - mysql-connector-python 8.0.33
-- python-dotenv
+- python-dotenv 1.0.0
 
 ##### Environment Variables:
 
