@@ -135,7 +135,7 @@ INSERT INTO `questions` VALUES (1,'Sport wodny uprawiany na desce z żaglem to: 
 ```bash
   pip install -r requirements.txt
 ```
-- Or
+- or
 ```bash
   pip install Flask==2.3.2
   pip install PyJWT==2.7.0
