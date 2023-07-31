@@ -133,10 +133,14 @@ INSERT INTO `questions` VALUES (1,'Sport wodny uprawiany na desce z żaglem to: 
 - Add the required environment variables to the .env file.
 - Install required packages on your venv:
 ```bash
-  pip install Flask
-  pip install PyJWT
-  pip install mysql-connector-python
-  pip install python-dotenv 
+  pip install -r requirements.txt
+```
+- Or
+```bash
+  pip install Flask==2.3.2
+  pip install PyJWT==2.7.0
+  pip install mysql-connector-python==8.0.33
+  pip install python-dotenv==1.0.0
 ```
 - Run API.py on Windows:
 ```bash
