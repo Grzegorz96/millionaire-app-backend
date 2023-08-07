@@ -270,7 +270,7 @@ E-mail: grzesstrzeszewski@gmail.com
 
 ## License
 
-[MIT](https://github.com/Grzegorz96/millionaire-app-backend/blob/master/LICENSE)
+[MIT](https://github.com/Grzegorz96/millionaire-app-backend/blob/master/LICENSE.md)
 
 
 ## Screnshoots
