@@ -181,7 +181,7 @@ INSERT INTO `questions` VALUES (1,'Sport wodny uprawiany na desce z żaglem to: 
 ```http
   GET /scores/?limit=
 ```
-| Resource  | Type     | Description                | Parametr  | Type     | Description                |
+| Resource  | Type     | Description                | Parameter  | Type     | Description                |
 | :-------- | :------- | :------------------------- | :-------- | :------- | :------------------------- |
 | `scores`  | `string` | **Required** Getting users with their points from the database. | `limit`   | `int` | **Not Required** Specifying the limit of downloaded records. |
 
