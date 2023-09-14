@@ -275,7 +275,7 @@ E-mail: grzesstrzeszewski@gmail.com
 
 ## Screnshoots
 ##### Users table
-![user](https://github.com/Grzegorz96/millionaire-app-backend/assets/129303867/a93aac89-229d-44f5-9aaa-0b34e3973d43)
+![usersmil](https://github.com/Grzegorz96/millionaire-app-backend/assets/129303867/1359819b-f864-46a6-a220-76c1d2c44943)
 ##### Questions table
 ![pytania](https://github.com/Grzegorz96/millionaire-app-backend/assets/129303867/51c53bf2-545a-40e2-920f-96ec5170343d)
 ##### Points table
