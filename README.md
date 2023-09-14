@@ -183,7 +183,7 @@ INSERT INTO `questions` VALUES (1,'Sport wodny uprawiany na desce z żaglem to: 
 ```
 | Resource  | Type     | Description                | Parametr  | Type     | Description                |
 | :-------- | :------- | :------------------------- | :-------- | :------- | :------------------------- |
-| `scores`  | `string` | **Required** Getting users with their points from the database. | `limit`   | `string` | **Not Required** Specifying the limit of downloaded records. |
+| `scores`  | `string` | **Required** Getting users with their points from the database. | `limit`   | `int` | **Not Required** Specifying the limit of downloaded records. |
 
 ```http
   GET /users/login
