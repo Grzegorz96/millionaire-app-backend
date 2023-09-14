@@ -195,9 +195,9 @@ INSERT INTO `questions` VALUES (1,'Sport wodny uprawiany na desce z żaglem to: 
 ```http
   GET /users/<user_id>  
 ```
-| Resource  | Type     | Description                | Sub-resource  | Type     | Description                |
-| :-------- | :------- | :------------------------- | :--------     | :------- | :------------------------- |
-| `users `  | `string` | **Required** Getting user data with given id. | `user_id`   | `string` | **Required** ID to specify the user. |
+| Resource  | Type     | Description                | Resoure id | Type     | Description                |
+| :-------- | :------- | :------------------------- | :--------- | :------- | :------------------------- |
+| `users `  | `string` | **Required** Getting user data with given id. | `user_id`   | `int` | **Required** ID to specify the user. |
 
 #### HTTP POST METHODS:
 
@@ -234,18 +234,18 @@ INSERT INTO `questions` VALUES (1,'Sport wodny uprawiany na desce z żaglem to: 
 ```http
   PATCH /users/<user_id>
 ```
-| Resource  | Type     | Description                | Sub-resource  | Type     | Description                |
-| :-------- | :------- | :------------------------- | :--------     | :------- | :------------------------- |
-| `users `  | `string` | **Required** Changing the user's data with the given id. | `user_id`   | `string` | **Required** ID to specify the user. |
+| Resource  | Type     | Description                | Resource id | Type     | Description                |
+| :-------- | :------- | :------------------------- | :---------- | :------- | :------------------------- |
+| `users `  | `string` | **Required** Changing the user's data with the given id. | `user_id`   | `int` | **Required** ID to specify the user. |
 
 #### HTTP DELETE METHODS:
 
 ```http
   DELETE /users/<user_id>
 ```
-| Resource  | Type     | Description                | Sub-resource  | Type     | Description                |
-| :-------- | :------- | :------------------------- | :--------     | :------- | :------------------------- |
-| `users `  | `string` | **Required** Deleting a user with a given id. | `user_id`   | `string` | **Required** ID to specify the user. |
+| Resource  | Type     | Description                | Resource id | Type     | Description                |
+| :-------- | :------- | :------------------------- | :---------- | :------- | :------------------------- |
+| `users `  | `string` | **Required** Deleting a user with a given id. | `user_id`   | `int` | **Required** ID to specify the user. |
 
 
 ## Lessons Learned
