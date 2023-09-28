@@ -200,7 +200,7 @@ INSERT INTO `questions` VALUES (1,'Sport wodny uprawiany na desce z żaglem to: 
 ```http
   GET /users/<user_id>  
 ```
-| Resource  | Type     | Description                | Resoure id | Type     | Description                |
+| Resource  | Type     | Description                | Resource id | Type     | Description                |
 | :-------- | :------- | :------------------------- | :--------- | :------- | :------------------------- |
 | `users `  | `string` | **Required** Getting user data with given id. | `user_id`   | `int` | **Required** ID to specify the user. |
 
