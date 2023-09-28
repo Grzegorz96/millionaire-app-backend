@@ -164,6 +164,7 @@ INSERT INTO `questions` VALUES (1,'Sport wodny uprawiany na desce z żaglem to: 
 
 #### HTTP GET METHODS:
 
+##### 1. Endpoint to the function that retrieves questions from the database.
 ```http
   GET /questions
 ```
@@ -171,6 +172,7 @@ INSERT INTO `questions` VALUES (1,'Sport wodny uprawiany na desce z żaglem to: 
 | :--------   | :-------| :------------------------- |
 | `questions` | `string`| **Required** Getting all questions from questions table. |
 
+##### 2. Endpoint to the function that checks whether a user with the given login or email exists in the database. JSON={"login":string, "email":string}.
 ```http
   GET /users/register/check-data
 ```
@@ -178,6 +180,7 @@ INSERT INTO `questions` VALUES (1,'Sport wodny uprawiany na desce z żaglem to: 
 | :-------- | :------- | :------------------------- |
 | `users`   | `string` | **Required** Checking if the given user is not already in the database. |
 
+##### 3. Endpoint to the function that downloads scores from the database. 
 ```http
   GET /scores/?limit=
 ```
@@ -185,6 +188,7 @@ INSERT INTO `questions` VALUES (1,'Sport wodny uprawiany na desce z żaglem to: 
 | :-------- | :------- | :------------------------- | :-------- | :------- | :------------------------- |
 | `scores`  | `string` | **Required** Getting users with their points from the database. | `limit`   | `int` | **Not Required** Specifying the limit of downloaded records. |
 
+##### 4. Endpoint to the function that retrieves the user's id from the database and creates an access token and a refresh token for it. JSON={"login":string, "password:string"}.
 ```http
   GET /users/login
 ```
@@ -192,6 +196,7 @@ INSERT INTO `questions` VALUES (1,'Sport wodny uprawiany na desce z żaglem to: 
 | :-------- | :------- | :------------------------- |
 | `users`   | `string` | **Required** Retrieving generated JWT tokens and user id. |
 
+##### 5. (token required) Endpoint to the function that retrieves information about the logged in user from the database using the user id from the url and after validating the access token. HEADERS={"access-token":string, "refresh-token":string}.
 ```http
   GET /users/<user_id>  
 ```
@@ -201,6 +206,7 @@ INSERT INTO `questions` VALUES (1,'Sport wodny uprawiany na desce z żaglem to: 
 
 #### HTTP POST METHODS:
 
+##### 1. Endpoint to the function that sends the activation number to the user's e-mail address. JSON={"email_receiver":string}.
 ```http
   POST /users/send-activation-number
 ```
@@ -208,6 +214,7 @@ INSERT INTO `questions` VALUES (1,'Sport wodny uprawiany na desce z żaglem to: 
 | :--------| :-------| :------------------------- |
 | `users`  | `string`| **Required** Sending an e-mail to the address provided in the request body. |
 
+##### 2. Endpoint to the function that adds a user to the database. JSON={"first_name":string, "last_name":string, "login":string, "password":string, "email":string}.
 ```http
   POST /users/register
 ```
@@ -215,6 +222,7 @@ INSERT INTO `questions` VALUES (1,'Sport wodny uprawiany na desce z żaglem to: 
 | :--------| :-------| :------------------------- |
 | `users`  | `string`| **Required** Inserting the given user data into a table in the database. |
 
+##### 3. (token required) Endpoint to the function that adds the points earned by the user to the database. The function uses the JWT access token. HEADERS={"access-token":string, "refresh-token":string}. JSON={"user_id":integer, "points":integer}.
 ```http
   POST /scores
 ```
@@ -222,6 +230,7 @@ INSERT INTO `questions` VALUES (1,'Sport wodny uprawiany na desce z żaglem to: 
 | :--------| :-------| :------------------------- |
 | `scores` | `string`| **Required** Inserting points for a specific player in a table in the database. |
 
+##### 4. (token required) Endpoint to the function that adds questions to the database. HEADERS={"access-token":string, "refresh-token":string}. JSON={"tresc":string, "odp":[string, string, string, string], "odp_poprawna":string, "trudnosc":integer} or JSON=[{},{}...].
 ```http
   POST /questions
 ```
@@ -231,6 +240,7 @@ INSERT INTO `questions` VALUES (1,'Sport wodny uprawiany na desce z żaglem to: 
 
 #### HTTP PATCH METHODS:
 
+##### 1. (token required) Endpoint to the function that update user information in the database. HEADERS={"access-token":string, "refresh-token":string}. JSON={"first_name":string} or JSON={"last_name":string} or JSON={"password":string}.
 ```http
   PATCH /users/<user_id>
 ```
@@ -240,6 +250,7 @@ INSERT INTO `questions` VALUES (1,'Sport wodny uprawiany na desce z żaglem to: 
 
 #### HTTP DELETE METHODS:
 
+##### 1. (token required) Endpoint to the function that delete user from the database. HEADERS={"access-token":string, "refresh-token":string}.
 ```http
   DELETE /users/<user_id>
 ```
@@ -256,7 +267,8 @@ While creating the project, i learned how to create a rest API. I have knowledge
 ## Features to be implemented
 
 - Additional data validation on the backend. At the moment, data validation takes place only on the frontend.
-
+- Hashing of user passwords in the database.
+- Password recovery and change function via a code sent to email.
 
 ## Authors
 
