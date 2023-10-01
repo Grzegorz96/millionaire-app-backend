@@ -129,8 +129,26 @@ INSERT INTO `questions` VALUES (1,'Sport wodny uprawiany na desce z żaglem to: 
 ```bash
  git clone https://github.com/Grzegorz96/millionaire-app-backend.git
 ```
-- Create .env file in your millionaire-app-backend folder.
+- Go to the millionaire-app-backend directory.
+- Open the WEATHER-APP on your IDE.
+- Create .env file in your millionaire-app-backend directory.
 - Add the required environment variables to the .env file.
+- Create virtual enviroment for the project (Windows):
+```bash
+ py -m venv venv
+```
+- Create virtual enviroment for the project (Linux):
+```bash
+ python3 -m venv venv
+```
+- Activate virtual enviroment (Windows):
+```bash
+ venv/Scripts/activate.bat
+```
+- Activate virtual enviroment (Linux):
+```bash
+ source venv/bin/activate
+```
 - Install required packages on your venv:
 ```bash
   pip install -r requirements.txt
