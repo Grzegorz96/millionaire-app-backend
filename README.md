@@ -130,7 +130,7 @@ INSERT INTO `questions` VALUES (1,'Sport wodny uprawiany na desce z żaglem to: 
  git clone https://github.com/Grzegorz96/millionaire-app-backend.git
 ```
 - Go to the millionaire-app-backend directory.
-- Open the WEATHER-APP on your IDE.
+- Open the millionaire-app-backend on your IDE.
 - Create .env file in your millionaire-app-backend directory.
 - Add the required environment variables to the .env file.
 - Create virtual enviroment for the project (Windows):
