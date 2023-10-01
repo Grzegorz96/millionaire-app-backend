@@ -151,14 +151,14 @@ INSERT INTO `questions` VALUES (1,'Sport wodny uprawiany na desce z żaglem to: 
 ```
 - Install required packages on your virtual enviroment:
 ```bash
-  pip install -r requirements.txt
+ pip install -r requirements.txt
 ```
 - or
 ```bash
-  pip install Flask==2.3.2
-  pip install PyJWT==2.7.0
-  pip install mysql-connector-python==8.0.33
-  pip install python-dotenv==1.0.0
+ pip install Flask==2.3.2
+ pip install PyJWT==2.7.0
+ pip install mysql-connector-python==8.0.33
+ pip install python-dotenv==1.0.0
 ```
 - Run API.py on Windows:
 ```bash
