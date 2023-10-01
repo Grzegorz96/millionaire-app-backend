@@ -19,8 +19,8 @@ app = Flask(__name__)
 app.config["SECRET_KEY"] = os.getenv("API_SECRET_KEY")
 
 
-# Creating tokens function with user_id parameter.
 def create_tokens(user_id):
+    """The function responsible for creating JWT tokens with user_id parameter and returning them."""
     # Creating payload for access_token with subject, expiration time and issued at. Exp informs about time when token
     # will be expired.
     payload = {
@@ -49,10 +49,11 @@ def create_tokens(user_id):
     return [access_token, refresh_token]
 
 
-# Token_required function for protecting endpoints with required access token.
 def token_required(f):
     @wraps(f)
     def decorated(*args, **kwargs):
+        """The function responsible for reading access and refresh tokens from headers and validating them. If the
+        access token expires, the function will try to refresh it using a refresh token."""
         # Assigning access and refresh tokens from request headers.
         access_token = request.headers.get("access-token")
         refresh_token = request.headers.get("refresh-token")
@@ -103,8 +104,8 @@ def token_required(f):
     return decorated
 
 
-# Refreshing access token function with refresh_token parameter.
 def refreshing_access_token(refresh_token):
+    """The function responsible for refreshing expired access tokens with refresh tokens."""
     # If refresh token is not existing, then return 401 status
     if not refresh_token:
         return jsonify(result="refresh_token is missing"), 401
@@ -147,9 +148,9 @@ def refreshing_access_token(refresh_token):
         return new_access_token
 
 
-# Function for getting questions.
 @app.route("/questions", methods=["GET"])
 def get_questions():
+    """The function responsible for getting questions from the database. Allowed methods: GET."""
     # Making empty connection and cursor, if connection and cursor won't be created then in finally won't be error.
     connection = None
     cur = None
@@ -179,9 +180,10 @@ def get_questions():
                 cur.close()
 
 
-# Function for checking data received from user.
 @app.route("/users/register/check-data", methods=["GET"])
 def check_data_for_registration():
+    """The function responsible for determining whether the data entered by the user is no longer in the database.
+    Allowed methods: GET."""
     # Making empty connection and cursor, if connection and cursor won't be created then in finally won't be error.
     connection = None
     cur = None
@@ -223,9 +225,9 @@ def check_data_for_registration():
                 cur.close()
 
 
-# Function for sending activation numbers to new users.
 @app.route("/users/send-activation-number", methods=["POST"])
 def send_activation_number():
+    """The function responsible for sending activation numbers to new users. Allowed methods: POST."""
     # Creating request body from request body json.
     request_body = request.get_json()
     # Calling function from Activation_number_sender module with user's email.
@@ -242,9 +244,9 @@ def send_activation_number():
         return jsonify(result=sending_result), 500
 
 
-# Function adding (register) user.
 @app.route("/users/register", methods=["POST"])
 def register_user():
+    """The function responsible for adding new users to the database. Allowed methods: POST."""
     # Making empty connection and cursor, if connection and cursor won't be created then in finally won't be error.
     connection = None
     cur = None
@@ -295,9 +297,9 @@ def register_user():
                 cur.close()
 
 
-# Get_scores function.
 @app.route("/scores", methods=["GET"])
 def get_scores():
+    """The function responsible for getting scores from the database. Allowed methods: GET."""
     # Making empty connection and cursor, if connection and cursor won't be created then in finally won't be error.
     connection = None
     cur = None
@@ -349,10 +351,10 @@ def get_scores():
                 cur.close()
 
 
-# Add_score function (protected by access_token).
 @app.route("/scores", methods=["POST"])
 @token_required
 def add_score():
+    """The function responsible for adding scores to the database (protected by access_token). Allowed methods: POST."""
     # Making empty connection and cursor, if connection and cursor won't be created then in finally won't be error.
     connection = None
     cur = None
@@ -393,10 +395,11 @@ def add_score():
                 cur.close()
 
 
-# Add_questions function (protected by access_token).
 @app.route("/questions", methods=["POST"])
 @token_required
 def add_questions():
+    """The function responsible for adding questions to the database (protected by access_token).
+    Allowed methods: POST."""
     # Making empty connection and cursor, if connection and cursor won't be created then in finally won't be error.
     connection = None
     cur = None
@@ -477,9 +480,9 @@ def add_questions():
                 cur.close()
 
 
-# Login function.
 @app.route("/users/login", methods=["GET"])
 def login_user():
+    """The function responsible for getting user id from the database and JWT tokens. Allowed methods: GET."""
     # Making empty connection and cursor, if connection and cursor won't be created then in finally won't be error.
     connection = None
     cur = None
@@ -530,10 +533,10 @@ def login_user():
                 cur.close()
 
 
-# Function for getting user info (protected by access_token).
 @app.route("/users/<user_id>", methods=["GET"])
 @token_required
 def get_user(user_id):
+    """The function responsible for getting user's data (protected by access_token). Allowed methods: GET."""
     # Making empty connection and cursor, if connection and cursor won't be created then in finally won't be error.
     connection = None
     cur = None
@@ -569,10 +572,11 @@ def get_user(user_id):
                 cur.close()
 
 
-# Update user function (protected by access_token).
 @app.route("/users/<user_id>", methods=["PATCH"])
 @token_required
 def update_user(user_id):
+    """The function responsible for updating user's data in the database (protected by access_token).
+    Allowed methods: PATCH."""
     # Making empty connection and cursor, if connection and cursor won't be created then in finally won't be error.
     connection = None
     cur = None
@@ -643,10 +647,11 @@ def update_user(user_id):
                 cur.close()
 
 
-# Delete user function (protected by access_token).
 @app.route("/users/<user_id>", methods=["DELETE"])
 @token_required
 def delete_user(user_id):
+    """The function responsible for setting the user flag to inactive in the database (protected by access_token).
+    Allowed methods: DELETE."""
     # Making empty connection and cursor, if connection and cursor won't be created then in finally won't be error.
     connection = None
     cur = None

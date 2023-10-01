@@ -9,8 +9,9 @@ import smtplib
 load_dotenv()
 
 
-# Function for sending activation number for new user.
 def sending_activation_number(email_receiver):
+    """The function responsible for directly sending the activation number in an email to the user and returning
+    the generated number."""
     # Assigning values from environment variables to local variables.
     email_sender = os.getenv("EMAIL_SENDER")
     email_password = os.getenv("EMAIL_SENDER_PASSWORD")
