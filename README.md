@@ -23,7 +23,7 @@ The program consists of 3 modules and each of them is responsible for something 
 
 **Server:** 
 - Languages: Python, SQL
-- Third Party Libraries: Flask, PyJWT, mysql-connector-python, python-dotenv
+- Third Party Libraries: Flask, Flask-Cors, PyJWT, mysql-connector-python, python-dotenv
 - Hosting for API: www.pythonanywhere.com
 - Hosting for MySQL database: www.pythonanywhere.com
 
@@ -38,6 +38,7 @@ The program consists of 3 modules and each of them is responsible for something 
 - Python 3.11.1
 - MySQL Server 8.0
 - Flask 2.3.2
+- Flask-Cors 4.0.0
 - PyJWT 2.7.0
 - mysql-connector-python 8.0.33
 - python-dotenv 1.0.0
@@ -156,6 +157,7 @@ INSERT INTO `questions` VALUES (1,'Sport wodny uprawiany na desce z żaglem to: 
 - or
 ```bash
  pip install Flask==2.3.2
+ pip install Flask-Cors==4.0.0
  pip install PyJWT==2.7.0
  pip install mysql-connector-python==8.0.33
  pip install python-dotenv==1.0.0
@@ -172,10 +174,11 @@ INSERT INTO `questions` VALUES (1,'Sport wodny uprawiany na desce z żaglem to: 
 ```bash
  app.run(debug=True, port=(set your own port))
 ```
-- If you want connect MILLIONAIRE.app program with local backend u need to change endpoints in [millionaire-app-frontend/Backend_requests.py](https://github.com/Grzegorz96/millionaire-app-frontend/blob/master/Backend_requests.py) on:
+- If you want connect MILLIONAIRE.app program with local backend, you need to change endpoints in [millionaire-app-frontend/Backend_requests.py](https://github.com/Grzegorz96/millionaire-app-frontend/blob/master/Backend_requests.py) on:
 ```bash
  url = "http://localhost:3000/endpoint"
 ```
+- If you want to query the API using the application in a browser, you must add its domain to the CORS object in [millionaire-app-backend/API.py](https://github.com/Grzegorz96/millionaire-app-backend/blob/master/API.py), this will allow you to receive permission to use the returned data in the browser.
 
 
 ## API Reference
