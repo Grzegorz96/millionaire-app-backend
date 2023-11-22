@@ -9,7 +9,8 @@ import os
 from dotenv import load_dotenv
 # Module with sending_activation_number function for sending email to user.
 from Activation_number_sender import sending_activation_number
-
+# Module for returning Access-Control-Allow-Origin header with web domains.
+from flask_cors import CORS
 
 # Loading environment variables.
 load_dotenv()
@@ -17,6 +18,8 @@ load_dotenv()
 app = Flask(__name__)
 # Assigning SECRET_KEY for access and refresh key from API_SECRET_KEY environment variable.
 app.config["SECRET_KEY"] = os.getenv("API_SECRET_KEY")
+# Permission for requesting by origins for every endpoint in application.
+CORS(app, resources={"*": {"origins": ["http://127.0.0.1:5500", "https://milionerzy-web-app.netlify.app"]}})
 
 
 def create_tokens(user_id):
