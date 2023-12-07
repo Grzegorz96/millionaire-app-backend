@@ -183,10 +183,10 @@ def get_questions():
                 cur.close()
 
 
-@app.route("/users/register/check-data", methods=["GET"])
+@app.route("/users/register/check-data", methods=["POST"])
 def check_data_for_registration():
     """The function responsible for determining whether the data entered by the user is no longer in the database.
-    Allowed methods: GET."""
+    Allowed methods: POST."""
     # Making empty connection and cursor, if connection and cursor won't be created then in finally won't be error.
     connection = None
     cur = None
@@ -483,9 +483,9 @@ def add_questions():
                 cur.close()
 
 
-@app.route("/users/login", methods=["GET"])
+@app.route("/users/login", methods=["POST"])
 def login_user():
-    """The function responsible for getting user id from the database and JWT tokens. Allowed methods: GET."""
+    """The function responsible for getting user id from the database and JWT tokens. Allowed methods: POST."""
     # Making empty connection and cursor, if connection and cursor won't be created then in finally won't be error.
     connection = None
     cur = None
