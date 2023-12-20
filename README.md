@@ -206,7 +206,7 @@ INSERT INTO `questions` VALUES (1,'Sport wodny uprawiany na desce z żaglem to: 
 
 ##### 3. (token required) Endpoint to the function that retrieves information about the logged in user from the database using the user id from the url and after validating the access token. HEADERS={"access-token":string, "refresh-token":string}.
 ```http
-  GET /users/<user_id>  
+  GET /users/<int:user_id>  
 ```
 | Resource  | Type     | Description                | Resource id | Type     | Description                |
 | :-------- | :------- | :------------------------- | :--------- | :------- | :------------------------- |
@@ -266,7 +266,7 @@ INSERT INTO `questions` VALUES (1,'Sport wodny uprawiany na desce z żaglem to: 
 
 ##### 1. (token required) Endpoint to the function that update user information in the database. HEADERS={"access-token":string, "refresh-token":string}. JSON={"first_name":string} or JSON={"last_name":string} or JSON={"password":string}.
 ```http
-  PATCH /users/<user_id>
+  PATCH /users/<int:user_id>
 ```
 | Resource  | Type     | Description                | Resource id | Type     | Description                |
 | :-------- | :------- | :------------------------- | :---------- | :------- | :------------------------- |
@@ -276,7 +276,7 @@ INSERT INTO `questions` VALUES (1,'Sport wodny uprawiany na desce z żaglem to: 
 
 ##### 1. (token required) Endpoint to the function that delete user from the database. HEADERS={"access-token":string, "refresh-token":string}.
 ```http
-  DELETE /users/<user_id>
+  DELETE /users/<int:user_id>
 ```
 | Resource  | Type     | Description                | Resource id | Type     | Description                |
 | :-------- | :------- | :------------------------- | :---------- | :------- | :------------------------- |
