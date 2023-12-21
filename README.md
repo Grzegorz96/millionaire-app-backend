@@ -17,6 +17,8 @@ The program consists of 3 modules and each of them is responsible for something 
 - The function of refreshing expired access tokens (15 minutes of validity) using an active refresh token (10 hours of validity).
 - Database CRUD functions.
 - Handling various errors and returning the appropriate code status.
+- The function that checks whether the user refers to his ID number during the operation.
+- Validation of all entered data.
 
 
 ## Technology used
@@ -290,7 +292,6 @@ While creating the project, i learned how to create a rest API. I have knowledge
 
 ## Features to be implemented
 
-- Additional data validation on the backend. At the moment, data validation takes place only on the frontend.
 - Hashing of user passwords in the database.
 - Password recovery and change function via a code sent to email.
 - Questions added should not go directly to the "questions" table, but first to a substitute table, and only after the administrator's verification should they be transferred to the main table.
