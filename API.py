@@ -265,7 +265,7 @@ def send_activation_number():
 
     # Return 400 if email does not meet the requirements.
     except (KeyError, TypeError, ValueError, IndexError):
-        return jsonify(result="Invalid email address or data key: {email_receiver:string}."), 400
+        return jsonify(result="Invalid email address or data key: {email_receiver: 'string'}."), 400
 
     else:
         # If return from sending_activation_number is dictionary it means email was send successfully, and we got
@@ -327,8 +327,8 @@ def register_user():
 
     # If the user does not provide valid keys and their values in json, it will return a status of 400.
     except (ValueError, TypeError, KeyError, IndexError):
-        return jsonify(result="The entered data does not meet the requirements. Required data: {first_name:'string', "
-                              "last_name:'string', login:'string', password:'string'}, email:'string'."), 400
+        return jsonify(result="The entered data does not meet the requirements. Required data: {first_name: 'string', "
+                              "last_name: 'string', login: 'string', password: 'string', email: 'string'}."), 400
 
     # If it succeeds, returning 201 status code.
     else:
@@ -435,7 +435,7 @@ def add_score():
     # If the user does not provide valid keys and their values in json, it will return a status of 400.
     except (ValueError, TypeError, KeyError, IndexError):
         return jsonify(result="The entered data does not meet the requirements. Required data: {user_id: integer, "
-                              "points: integer>1000."), 400
+                              "points: integer>1000}."), 400
 
     # If it succeeds, returning  with 201 status code.
     else:
@@ -567,7 +567,7 @@ def login_user():
     # If the user does not provide valid keys and their values in json, it will return a status of 400.
     except (ValueError, TypeError, KeyError, IndexError):
         return jsonify(result="The entered data does not meet the requirements. Required data: {login: 'string', "
-                              "password: 'string'."), 400
+                              "password: 'string'}."), 400
 
     # If wasn't errors, checking if record with provided login, password and active_flag=1 was selected.
     else:
@@ -721,7 +721,7 @@ def update_user(user_id):
     # If the user does not provide valid keys and their values in json, it will return a status of 400.
     except (ValueError, TypeError, IndexError):
         return jsonify(result="The entered data does not meet the requirements. Required data: {first_name: 'string'} "
-                              "or {last_name: 'string} or {password: 'string'}."), 400
+                              "or {last_name: 'string'} or {password: 'string'}."), 400
 
     # If it succeeds, returning 200 status with successful information.
     else:
