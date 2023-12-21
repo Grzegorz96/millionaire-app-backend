@@ -11,6 +11,8 @@ from dotenv import load_dotenv
 from Activation_number_sender import sending_activation_number
 # Module for returning Access-Control-Allow-Origin header with web domains.
 from flask_cors import CORS
+# Import of the validating module.
+from re import match
 
 # Loading environment variables.
 load_dotenv()
@@ -66,6 +68,10 @@ def token_required(f):
         if not access_token:
             return jsonify(result="access_token is missing"), 401
 
+        # If refresh token is not existing, then return 401 status
+        if not refresh_token:
+            return jsonify(result="refresh_token is missing"), 401
+
         # If access_token exist, trying to decode it with KEY and algorithm.
         try:
             jwt.decode(access_token, app.config["SECRET_KEY"], algorithms=['HS256'])
@@ -110,10 +116,6 @@ def token_required(f):
 
 def refreshing_access_token(refresh_token):
     """The function responsible for refreshing expired access tokens with refresh tokens."""
-    # If refresh token is not existing, then return 401 status
-    if not refresh_token:
-        return jsonify(result="refresh_token is missing"), 401
-
     # Trying to decode refresh token with KEY and algorithm.
     try:
         decoded_refresh_token = jwt.decode(refresh_token, app.config["SECRET_KEY"], algorithms=['HS256'])
@@ -150,6 +152,14 @@ def refreshing_access_token(refresh_token):
 
         # Returning new access token.
         return new_access_token
+
+
+def validate_user_id(user_id, access_token):
+    """The function responsible for user ID validation."""
+    # Assigning user id from token JWT.
+    access_token_user_id = jwt.decode(access_token, options={"verify_signature": False})["sub"]
+    if user_id == access_token_user_id:
+        return True
 
 
 @app.route("/questions", methods=["GET"])
@@ -194,11 +204,16 @@ def check_data_for_registration():
 
     # Trying to perform a database operation.
     try:
+        # Creating request data from request body.
+        request_data = request.get_json()
+        # Validation of entered data.
+        if not (match("^[A-ZĘÓĄŚŁŻŹĆŃa-zęóąśłżźćń0-9]{5,45}$", request_data["login"]) and
+                match("^([A-Za-z0-9]+|[A-Za-z0-9][A-Za-z0-9._-]+[A-Za-z0-9])@([A-Za-z0-9]+|[A-Za-z0-9._-]+[A-Za-z0-9])\.[A-Za-z0-9]+$",
+                      request_data["email"])):
+            raise ValueError
         # Making connection and cursor as dictionary.
         connection = database_connect()
         cur = connection.cursor(dictionary=True)
-        # Creating request data from request body.
-        request_data = request.get_json()
         # Making query.
         query = """SELECT user_id FROM users
                    WHERE login=%(login)s OR email=%(email)s"""
@@ -209,6 +224,11 @@ def check_data_for_registration():
     except mysql.connector.Error as message:
         return jsonify(result=message.msg), 500
 
+    # If the user does not provide valid keys and their values in json, it will return a status of 400.
+    except (ValueError, TypeError, KeyError, IndexError):
+        return jsonify(result="The entered data does not meet the requirements. "
+                              "Required data: {login:'string', email:'string'}."), 400
+
     # If everything ok, checking if is something retrieved from cursor. When there will be user id it means that
     # in database is already registered user with those currently provided data and user can't create account with
     # these data. In case there is nothing there, user can create account with this data.
@@ -216,10 +236,10 @@ def check_data_for_registration():
         user_id = cur.fetchall()
         # Returning information with 200 status.
         if not user_id:
-            return jsonify(result="login and e-mail are available"), 200
+            return jsonify(result="login and e-mail are available."), 200
         # Returning information with 226 status.
         else:
-            return jsonify(result="login or e-mail are not available"), 226
+            return jsonify(result="login or e-mail are not available."), 226
 
     # Closing connection with database and cursor if it exists.
     finally:
@@ -232,20 +252,31 @@ def check_data_for_registration():
 @app.route("/users/send-activation-number", methods=["POST"])
 def send_activation_number():
     """The function responsible for sending activation numbers to new users. Allowed methods: POST."""
-    # Creating request body from request body json.
-    request_body = request.get_json()
-    # Calling function from Activation_number_sender module with user's email.
-    sending_result = sending_activation_number(request_body["email_receiver"])
+    try:
+        # Creating request body from request body json.
+        request_body = request.get_json()
+        # Validation of entered data.
+        if not match("^([A-Za-z0-9]+|[A-Za-z0-9][A-Za-z0-9._-]+[A-Za-z0-9])@([A-Za-z0-9]+|[A-Za-z0-9._-]+[A-Za-z0-9])\.[A-Za-z0-9]+$",
+                     request_body["email_receiver"]):
+            raise ValueError
 
-    # If return from sending_activation_number is dictionary it means email was send successfully, and we got activation
-    # number from function. We have to return this number in sending_result to frontend, to check if the user entered
-    # the correct number.
-    if isinstance(sending_result, dict):
-        # Returning 200 status
-        return jsonify(result=sending_result), 200
-    # Returning 500 status, email wasn't send successfully.
+        # Calling function from Activation_number_sender module with user's email.
+        sending_result = sending_activation_number(request_body["email_receiver"])
+
+    # Return 400 if email does not meet the requirements.
+    except (KeyError, TypeError, ValueError, IndexError):
+        return jsonify(result="Invalid email address or data key: {email_receiver:string}."), 400
+
     else:
-        return jsonify(result=sending_result), 500
+        # If return from sending_activation_number is dictionary it means email was send successfully, and we got
+        # activation number from function. We have to return this number in sending_result to frontend, to check if the
+        # user entered the correct number.
+        if isinstance(sending_result, dict):
+            # Returning 200 status
+            return jsonify(result=sending_result), 200
+        # Returning 500 status, email wasn't send successfully.
+        else:
+            return jsonify(result=sending_result), 500
 
 
 @app.route("/users/register", methods=["POST"])
@@ -257,11 +288,20 @@ def register_user():
 
     # Trying to perform a database operation.
     try:
+        # Assignment request body into request data variable.
+        request_data = request.get_json()
+        # Validation of entered data.
+        if not (match("^[A-ZĘÓĄŚŁŻŹĆŃa-zęóąśłżźćń]{2,45}$", request_data["first_name"]) and
+                match("^[A-ZĘÓĄŚŁŻŹĆŃa-zęóąśłżźćń]{2,45}$", request_data["last_name"]) and
+                match("^[A-ZĘÓĄŚŁŻŹĆŃa-zęóąśłżźćń0-9]{5,45}$", request_data["login"]) and
+                match("^[A-ZĘÓĄŚŁŻŹĆŃa-zęóąśłżźćń0-9!@#$%^&*]{7,45}$", request_data["password"]) and
+                match(
+                    "^([A-Za-z0-9]+|[A-Za-z0-9][A-Za-z0-9._-]+[A-Za-z0-9])@([A-Za-z0-9]+|[A-Za-z0-9._-]+[A-Za-z0-9])\.[A-Za-z0-9]+$",
+                    request_data["email"])):
+            raise ValueError
         # Making connection and cursor.
         connection = database_connect()
         cur = connection.cursor(dictionary=True)
-        # Assignment request body into request data variable.
-        request_data = request.get_json()
         # Making query.
         query = """INSERT INTO users(first_name, last_name, login, password, email)
                    VALUES(%(first_name)s, %(last_name)s, %(login)s,  %(password)s, %(email)s) """
@@ -271,23 +311,24 @@ def register_user():
 
     # If error was occurred.
     except mysql.connector.Error as message:
-        # If is error in sql syntax, user declared bad name of key. Returning 400 status with info.
-        if "You have an error in your SQL syntax" in message.msg:
-            return jsonify(key_error="Required keys: first_name, last_name, login, password, email."), 400
-
         # If "login_UNIQUE" in message.msg it means that user with the given login is already in database, login
         # column has unique key. Returning 400 status.
-        elif "login_UNIQUE" in message.msg:
-            return jsonify(login_error="The user with the given login is already registered"), 400
+        if "login_UNIQUE" in message.msg:
+            return jsonify(login_error="The user with the given login is already registered."), 400
 
         # If "email_UNIQUE" in message.msg it means that user with the given email is already in database, email
         # column has unique key. Returning 400 status.
         elif "email_UNIQUE" in message.msg:
-            return jsonify(email_error="The user with the given e-mail address is already registered"), 400
+            return jsonify(email_error="The user with the given e-mail address is already registered."), 400
 
         # If other error, returning 500 status.
         else:
             return jsonify(result=message.msg), 500
+
+    # If the user does not provide valid keys and their values in json, it will return a status of 400.
+    except (ValueError, TypeError, KeyError, IndexError):
+        return jsonify(result="The entered data does not meet the requirements. Required data: {first_name:'string', "
+                              "last_name:'string', login:'string', password:'string'}, email:'string'."), 400
 
     # If it succeeds, returning 201 status code.
     else:
@@ -310,14 +351,15 @@ def get_scores():
 
     # Trying to perform a database operation.
     try:
-        # Making connection and cursor.
-        connection = database_connect()
-        cur = connection.cursor(dictionary=True)
         # Assigning ?limit= from parameter into limit variable.
         limit = request.args.get("limit")
         # Checking is user given limit parameter. If he did, creating query with limit if he didn't, query will not
         # have limit parameter.
         if limit:
+            # Validation of entered data.
+            if not (int(limit) > 0):
+                raise ValueError
+
             # Making query.
             query = f"""SELECT DISTINCT users.first_name, users.last_name, top_scores.points FROM users
                         JOIN top_scores ON users.user_id=top_scores.user_id
@@ -329,19 +371,20 @@ def get_scores():
             query = """SELECT DISTINCT users.first_name, users.last_name, top_scores.points FROM users
                        JOIN top_scores ON users.user_id=top_scores.user_id
                        ORDER BY points DESC"""
+        # Making connection and cursor.
+        connection = database_connect()
+        cur = connection.cursor(dictionary=True)
         # Executing query.
         cur.execute(query)
 
     # If error with executing query then check what type of error.
     except mysql.connector.Error as message:
-        # if "Undeclared variable" in message.msg that means, user gave unacceptable value in url parameter.
-        # Returning 400 status response.
-        if "Undeclared variable" in message.msg:
-            return jsonify(result="Wrong value in limit parameter."), 400
+        # Returning 500 status response.
+        return jsonify(result=message.msg), 500
 
-        # Other error, returning 500 status response.
-        else:
-            return jsonify(result=message.msg), 500
+    # If the user does not provide valid value in parameter, it will return a status of 400.
+    except (ValueError, TypeError, KeyError, IndexError):
+        return jsonify(result="Invalid value in the parameter."), 400
 
     # If everything ok then return results fetched from the cursor with 200 status.
     else:
@@ -365,11 +408,18 @@ def add_score():
 
     # Trying to perform a database operation.
     try:
+        # Assignment request body into request data variable.
+        request_data = request.get_json()
+        # Validation of entered data.
+        request_data["user_id"] = int(request_data["user_id"])
+        if not (int(request_data["points"]) > 1000):
+            raise ValueError
+        # Checking whether the user refers to the user saved in the token.
+        if not validate_user_id(request_data["user_id"], request.headers["access-token"]):
+            return jsonify(result="Invalid user id."), 403
         # Making connection and cursor.
         connection = database_connect()
         cur = connection.cursor(dictionary=True)
-        # Assignment request body into request data variable.
-        request_data = request.get_json()
         # Making query.
         query = """INSERT INTO top_scores(user_id, points)
                    VALUES(%(user_id)s, %(points)s)"""
@@ -379,13 +429,13 @@ def add_score():
 
     # Error with executing query.
     except mysql.connector.Error as message:
-        # If is error in sql syntax, user declared bad name of key, returning 400 status.
-        if "You have an error in your SQL syntax" in message.msg:
-            return jsonify(result="Required keys: user_id, points."), 400
+        # Returning 500 status.
+        return jsonify(result=message.msg), 500
 
-        # Other error, returning 500 status.
-        else:
-            return jsonify(result=message.msg), 500
+    # If the user does not provide valid keys and their values in json, it will return a status of 400.
+    except (ValueError, TypeError, KeyError, IndexError):
+        return jsonify(result="The entered data does not meet the requirements. Required data: {user_id: integer, "
+                              "points: integer>1000."), 400
 
     # If it succeeds, returning  with 201 status code.
     else:
@@ -410,9 +460,6 @@ def add_questions():
 
     # Trying to perform a database operation.
     try:
-        # Making connection and cursor.
-        connection = database_connect()
-        cur = connection.cursor()
         # Assignment request body into request data variable.
         request_body = request.get_json()
         # Making query.
@@ -422,13 +469,13 @@ def add_questions():
         # by for loop and added to the main query.
         if isinstance(request_body, list):
             for dictionary in request_body:
-                content = dictionary["tresc"]
-                a = dictionary["odp"][0]
-                b = dictionary["odp"][1]
-                c = dictionary["odp"][2]
-                d = dictionary["odp"][3]
-                right_answer = dictionary["odp_poprawna"]
-                difficulty = dictionary['trudnosc']
+                content = dictionary["content"]
+                a = dictionary["answers"][0]
+                b = dictionary["answers"][1]
+                c = dictionary["answers"][2]
+                d = dictionary["answers"][3]
+                right_answer = dictionary["right_answer"]
+                difficulty = dictionary["difficulty"]
 
                 # For not last records with commas.
                 if request_body.index(dictionary) < (len(request_body) - 1):
@@ -440,37 +487,42 @@ def add_questions():
 
         # If request body is dictionary (1 question), then will be converted into SQL query and added to the main query.
         elif isinstance(request_body, dict):
-            content = request_body["tresc"]
-            a = request_body["odp"][0]
-            b = request_body["odp"][1]
-            c = request_body["odp"][2]
-            d = request_body["odp"][3]
-            right_answer = request_body["odp_poprawna"]
-            difficulty = request_body['trudnosc']
+            content = request_body["content"]
+            a = request_body["answers"][0]
+            b = request_body["answers"][1]
+            c = request_body["answers"][2]
+            d = request_body["answers"][3]
+            right_answer = request_body["right_answer"]
+            difficulty = request_body["difficulty"]
             query += fr""" ("{content}", "{a}", "{b}", "{c}", "{d}", "{right_answer}", {difficulty})"""
 
         # If user want to add other type than list/dict, there will be ValueError raised.
         else:
             raise ValueError
+
+        # Making connection and cursor.
+        connection = database_connect()
+        cur = connection.cursor()
         # Executing and committing changes.
         cur.execute(query)
         connection.commit()
 
-    # If KeyError, returning 400 status code with json.
-    except KeyError:
-        return jsonify(result="Required keys: tresc, odp, odp_poprawna, trudnosc."), 400
-
-    # If Index or ValueError that user worded incorrectly questions in request body and returning 400 status with
-    # information.
-    except (IndexError, ValueError):
-        return jsonify(result="The question was worded incorrectly. Wording required: "
-                              "[{tresc:nowe pytanie, odp:[odpowiedz1, odpowiedz2, odpowiedz3, odpowiedz4], "
-                              "odp_poprawna:C, trudnosc:0}] or {tresc:nowe pytanie, odp:[odpowiedz1, odpowiedz2,"
-                              " odpowiedz3, odpowiedz4], odp_poprawna:C, trudnosc:0}."), 400
-
     # Error with executing query, returning 500 status with msg.
     except mysql.connector.Error as message:
         return jsonify(result=message.msg), 500
+
+    # If KeyError, returning 400 status code with json.
+    except KeyError:
+        return jsonify(result="Required keys: content, answers, right_answer, difficulty."), 400
+
+    # If IndexError, ValueError or TypeError that user worded incorrectly questions in request body and returning 400
+    # status with information.
+    except (ValueError, TypeError, IndexError):
+        return jsonify(result="The question was worded incorrectly. Wording required: "
+                              "[{content: 'string', answers: ['string', 'string', 'string', 'string'], "
+                              "right_answer: 'string', difficulty: integer}] or {content: 'string', answers: "
+                              "['string', 'string', 'string', 'string'], right_answer: 'string', "
+                              "difficulty: integer}."), 400
 
     # If everything ok, then returning 201 status with information.
     else:
@@ -493,11 +545,15 @@ def login_user():
 
     # Trying to perform a database operation.
     try:
+        # Assignment request body into request data variable.
+        request_data = request.get_json()
+        # Validation of entered data.
+        if not (match("^[A-ZĘÓĄŚŁŻŹĆŃa-zęóąśłżźćń0-9]{5,45}$", request_data["login"]) and
+                match("^[A-ZĘÓĄŚŁŻŹĆŃa-zęóąśłżźćń0-9!@#$%^&*]{7,45}$", request_data["password"])):
+            raise ValueError
         # Making connection and cursor.
         connection = database_connect()
         cur = connection.cursor(dictionary=True)
-        # Assignment request body into request data variable.
-        request_data = request.get_json()
         # Making query.
         query = """SELECT user_id FROM users
                    WHERE login=%(login)s AND password=%(password)s AND active_flag=1"""
@@ -507,6 +563,11 @@ def login_user():
     # Return details of error with 500 status code.
     except mysql.connector.Error as message:
         return jsonify(result=message.msg), 500
+
+    # If the user does not provide valid keys and their values in json, it will return a status of 400.
+    except (ValueError, TypeError, KeyError, IndexError):
+        return jsonify(result="The entered data does not meet the requirements. Required data: {login: 'string', "
+                              "password: 'string'."), 400
 
     # If wasn't errors, checking if record with provided login, password and active_flag=1 was selected.
     else:
@@ -537,10 +598,13 @@ def login_user():
                 cur.close()
 
 
-@app.route("/users/<user_id>", methods=["GET"])
+@app.route("/users/<int:user_id>", methods=["GET"])
 @token_required
 def get_user(user_id):
     """The function responsible for getting user's data (protected by access_token). Allowed methods: GET."""
+    # Checking whether the user refers to the user saved in the token.
+    if not validate_user_id(user_id, request.headers["access-token"]):
+        return jsonify(result="Invalid user id."), 403
     # Making empty connection and cursor, if connection and cursor won't be created then in finally won't be error.
     connection = None
     cur = None
@@ -550,13 +614,11 @@ def get_user(user_id):
         # Making connection and cursor as dictionary.
         connection = database_connect()
         cur = connection.cursor(dictionary=True)
-        # Creating empty request_data.
-        request_data = {}
+        # Creating request_data and adding user_id from endpoint's subresource.
+        request_data = {"user_id": user_id}
         # Making query.
         query = """SELECT user_id, first_name, last_name, login, password, email, active_flag FROM users
                    WHERE user_id=%(user_id)s AND active_flag=1"""
-        # Adding user_id from endpoint's subresource to the request_data.
-        request_data["user_id"] = user_id
         # Executing query.
         cur.execute(query, request_data)
 
@@ -564,9 +626,14 @@ def get_user(user_id):
     except mysql.connector.Error as message:
         return jsonify(result=message.msg), 500
 
-    # When everything ok, returning 200 status with selected info about user in response body.
     else:
-        return jsonify(result=cur.fetchall()), 200
+        user_data = cur.fetchall()
+        if user_data:
+            # When everything ok, returning 200 status with selected info about user in response body.
+            return jsonify(result=user_data), 200
+        else:
+            # Else returning 401 status with error message.
+            return jsonify(result="The user with the given id does not exist"), 401
 
     # Closing connection with database and cursor if it exists.
     finally:
@@ -576,11 +643,14 @@ def get_user(user_id):
                 cur.close()
 
 
-@app.route("/users/<user_id>", methods=["PATCH"])
+@app.route("/users/<int:user_id>", methods=["PATCH"])
 @token_required
 def update_user(user_id):
     """The function responsible for updating user's data in the database (protected by access_token).
     Allowed methods: PATCH."""
+    # Checking whether the user refers to the user saved in the token.
+    if not validate_user_id(user_id, request.headers["access-token"]):
+        return jsonify(result="Invalid user id."), 403
     # Making empty connection and cursor, if connection and cursor won't be created then in finally won't be error.
     connection = None
     cur = None
@@ -600,14 +670,23 @@ def update_user(user_id):
         # Checking what information user want to change. If "first_name" key in request_data then creating and adding
         # query with SET first_name.
         if "first_name" in request_data.keys():
+            # Validation of entered data.
+            if not match("^[A-ZĘÓĄŚŁŻŹĆŃa-zęóąśłżźćń]{2,45}$", request_data["first_name"]):
+                raise ValueError
             query += """ SET first_name=%(first_name)s"""
 
         # If "last_name" key in request_data then creating and adding query with SET last_name.
         elif "last_name" in request_data.keys():
+            # Validation of entered data.
+            if not match("^[A-ZĘÓĄŚŁŻŹĆŃa-zęóąśłżźćń]{2,45}$", request_data["last_name"]):
+                raise ValueError
             query += """ SET last_name=%(last_name)s"""
 
         # If "password" key in request_data then creating and adding query with SET_password.
         elif "password" in request_data.keys():
+            # Validation of entered data.
+            if not match("^[A-ZĘÓĄŚŁŻŹĆŃa-zęóąśłżźćń0-9!@#$%^&*]{7,45}$", request_data["password"]):
+                raise ValueError
             query += """ SET password=%(password)s"""
 
         # If other key in request_data (in front end user can change only first_name, last_name and password) then
@@ -639,6 +718,11 @@ def update_user(user_id):
         return jsonify(result="User with given id does not exist or "
                               "you are trying to update a resource with the same data."), 409
 
+    # If the user does not provide valid keys and their values in json, it will return a status of 400.
+    except (ValueError, TypeError, IndexError):
+        return jsonify(result="The entered data does not meet the requirements. Required data: {first_name: 'string'} "
+                              "or {last_name: 'string} or {password: 'string'}."), 400
+
     # If it succeeds, returning 200 status with successful information.
     else:
         return jsonify(result="Update successful."), 200
@@ -651,11 +735,14 @@ def update_user(user_id):
                 cur.close()
 
 
-@app.route("/users/<user_id>", methods=["DELETE"])
+@app.route("/users/<int:user_id>", methods=["DELETE"])
 @token_required
 def delete_user(user_id):
     """The function responsible for setting the user flag to inactive in the database (protected by access_token).
     Allowed methods: DELETE."""
+    # Checking whether the user refers to the user saved in the token.
+    if not validate_user_id(user_id, request.headers["access-token"]):
+        return jsonify(result="Invalid user id."), 403
     # Making empty connection and cursor, if connection and cursor won't be created then in finally won't be error.
     connection = None
     cur = None
@@ -665,14 +752,12 @@ def delete_user(user_id):
         # Making connection and cursor.
         connection = database_connect()
         cur = connection.cursor(dictionary=True)
-        # Creating empty request_data.
-        request_data = {}
+        # Creating request_data and adding user_id from endpoint's subresource.
+        request_data = {"user_id": user_id}
         # Making query.
         query = """UPDATE users
                    SET active_flag=False 
                    WHERE user_id=%(user_id)s AND active_flag=1"""
-        # Adding user_id from endpoint's subresource to the request_data.
-        request_data["user_id"] = user_id
         # Execute and commit query.
         cur.execute(query, request_data)
         connection.commit()
