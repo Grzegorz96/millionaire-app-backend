@@ -156,10 +156,15 @@ def refreshing_access_token(refresh_token):
 
 def validate_user_id(user_id, access_token):
     """The function responsible for user ID validation."""
-    # Assigning user id from token JWT.
-    access_token_user_id = jwt.decode(access_token, options={"verify_signature": False})["sub"]
-    if user_id == access_token_user_id:
-        return True
+    try:
+        # Assigning user id from token JWT.
+        access_token_user_id = jwt.decode(access_token, options={"verify_signature": False})["sub"]
+    except Exception:
+        pass
+    else:
+        # If the entered user id is equal to the user id from the token, I return true, in any other case return false.
+        if user_id == access_token_user_id:
+            return True
 
 
 @app.route("/questions", methods=["GET"])
