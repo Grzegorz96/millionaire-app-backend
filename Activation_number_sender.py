@@ -46,7 +46,7 @@ def sending_activation_number(email_receiver):
     em["Subject"] = subject
     em.set_content(body)
 
-    # Creating contest.
+    # Creating context.
     context = ssl.create_default_context()
 
     # Trying to send email object by smtp server. First program logging in by name of email and password, then sending
