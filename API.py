@@ -21,7 +21,7 @@ app = Flask(__name__)
 # Assigning SECRET_KEY for access and refresh key from API_SECRET_KEY environment variable.
 app.config["SECRET_KEY"] = os.getenv("API_SECRET_KEY")
 # Permission for requesting by origins for every endpoint in application and exposing headers.
-CORS(app, resources={"*": {"origins": ["http://127.0.0.1:5500", "https://milionerzy-web-app.netlify.app"]}},
+CORS(app, resources={"*": {"origins": ["http://127.0.0.1:5500", "https://millionaire-web-app.netlify.app"]}},
      expose_headers=["access-token", "refresh-token"])
 
 
