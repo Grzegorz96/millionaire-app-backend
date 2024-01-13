@@ -298,7 +298,7 @@ While creating the project, i learned how to create a rest API. I have knowledge
 
 ## Authors
 
-- [@Grzegorz96](https://www.github.com/Grzegorz96)
+[@Grzegorz96](https://www.github.com/Grzegorz96)
 
 
 ## Contact
