@@ -177,10 +177,11 @@ INSERT INTO `questions` VALUES (1,'Sport wodny uprawiany na desce z żaglem to: 
 ```bash
  app.run(debug=True, port=(set your own port))
 ```
-- If you want connect MILLIONAIRE.app program with local backend, you need to change endpoints in [millionaire-app-frontend/Backend_requests.py](https://github.com/Grzegorz96/millionaire-app-frontend/blob/master/Backend_requests.py) on:
+- If you want connect desktop MILLIONAIRE.app program with local backend, you need to change endpoints in [millionaire-app-frontend/Backend_requests.py](https://github.com/Grzegorz96/millionaire-app-frontend/blob/master/Backend_requests.py) on:
 ```bash
  url = "http://localhost:3000/endpoint"
 ```
+also when trying to connect Millionaire webapp, change the endpoint url to the current one.
 - If you want to query the API using your own application in a browser, you must add its domain to the CORS object in [millionaire-app-backend/API.py](https://github.com/Grzegorz96/millionaire-app-backend/blob/master/API.py), this will allow you to receive permission to use the returned data in the browser:
 ```bash
  CORS(app, resources={"*": {"origins": "https://your-own-domain.com"}})
