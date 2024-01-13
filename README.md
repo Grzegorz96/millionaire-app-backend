@@ -38,6 +38,7 @@ The program consists of 3 modules and each of them is responsible for something 
 
 ##### Programs and libraries:
 - Python 3.11.1
+- IDE, for example Pycharm
 - MySQL Server 8.0
 - Flask 2.3.2
 - Flask-Cors 4.0.0
