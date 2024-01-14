@@ -22,7 +22,7 @@ For the program to function correctly, it also requires environmental variables 
 
 ## Features
 
-- Access token and refresh token generation function.
+- A function that generates access tokens and refresh tokens.
 - A function that protects endpoints against access by unauthorized persons.
 - The function of sending the generated confirmation number to the user's e-mail address.
 - The function of refreshing expired access tokens (15 minutes of validity) using an active refresh token (10 hours of validity).
