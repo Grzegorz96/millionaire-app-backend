@@ -1,12 +1,23 @@
 ![logo frontend](https://github.com/Grzegorz96/millionaire-app-frontend/assets/129303867/1b1610c8-d435-47a3-92be-df9ce009fef5)
-# API for MILLIONAIRE.app
+# API for MILLIONAIRE.app and MILLIONAIRE.webapp
 
-The API allows the user to connect to the database from the level of the frontend application. The program contains many endpoints needed for the functioning of the frontend. It also has a JSON Web Token generator, a function that protect endpoints, a function that refreshes expired access tokens and a program for automatically sending generated activation numbers to email. The program can be run on both Windows and Linux.
+The Millionaire API enables users to establish a connection with the database directly from the frontend application. The program encompasses numerous endpoints necessary for the smooth functioning of the frontend. Additionally, it includes a JSON Web Token generator, a function securing endpoints, data input validation, a mechanism refreshing expired access tokens, and a tool for automatically sending generated activation numbers to email. The program is compatible with both Windows and Linux operating systems.
 
 
 ## Description of the modules
 
-The program consists of 3 modules and each of them is responsible for something else. The API.py module is responsible for receiving requests, handling them and returning answers. In addition, this module generates a JWT access token and a JWT refresh token for a newly logged-in user, refreshes expired access tokens and protects some endpoints for which an access token is required. It is responsible for direct operations on the MySQL database. Database_connection.py is responsible for creating the database connection required by the function in API.py. The last module Activation_numvber_sender.py is used to generate the activation code and send it to the imported email address. In order for the program to work, it additionally requires the .env environment variables. All 3 modules retrieve the necessary data and passwords from the .env file.
+The program consists of 3 modules, each of which plays a unique role in the functioning of the application. Below is a brief description of each module:
+
+API.py:
+- The API.py module is responsible for handling requests, processing them, and returning responses. Additionally, this module generates JWT access tokens and JWT refresh tokens for newly logged-in users, refreshes expired access tokens, and secures certain endpoints that require access tokens. The functions on endpoints include validation for input data. This module is also responsible for direct operations on the MySQL database.
+
+Database_conection.py:
+- The Database_connection.py module is responsible for establishing a connection to the database, as required by the functions in the API.py module.
+
+Activaiton_number_sender.py:
+- The Activation_number_sender.py module is used to generate activation codes and send them to the specified email address.
+
+For the program to function correctly, it also requires environmental variables defined in the .env file. All three modules retrieve necessary data and passwords from this file.
 
 
 ## Features
@@ -289,7 +300,7 @@ INSERT INTO `questions` VALUES (1,'Sport wodny uprawiany na desce z żaglem to: 
 
 ## Lessons Learned
 
-While creating the project, i learned how to create a rest API. I have knowledge about working with JSON Web Tokens and I know how to send e-mails automatically. The challenge was also to implement the backend application with database on a web hosting platform so that everything would work flawlessly. I consolidated my knowledge of the SQL language and working with databases. I learned how to combine many programs using different technologies. I expanded my knowledge by working with .env files and learned a lot about API, HTTP, SMTP, Ipv4, localhost and computer networks in general.
+While creating the project, I acquired the skill of building a REST API. I have knowledge about working with JSON Web Tokens, and I know how to automatically send emails. Another challenge was implementing the backend application with a database on a web hosting platform to ensure seamless functionality. I strengthened my understanding of the SQL language and database operations. I learned how to integrate multiple programs using different technologies. I expanded my knowledge by working with .env files and gained insights into API, HTTP, SMTP, IPv4, localhost, and computer networks in general.
 
 
 ## Features to be implemented
