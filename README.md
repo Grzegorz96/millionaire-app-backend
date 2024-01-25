@@ -164,7 +164,7 @@ INSERT INTO `questions` VALUES (1,'Sport wodny uprawiany na desce z żaglem to: 
 ```bash
  source venv/bin/activate
 ```
-- Install required packages on your virtual enviroment:
+- Install required packages on your activated virtual enviroment:
 ```bash
  pip install -r requirements.txt
 ```
