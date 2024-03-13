@@ -298,7 +298,7 @@ INSERT INTO `questions` VALUES (1,'Sport wodny uprawiany na desce z żaglem to: 
 | `users `  | `string` | **Required** Deleting a user with a given id. | `user_id`   | `int` | **Required** ID to specify the user. |
 
 
-## Lessons Learned
+## Lessons learned
 
 While creating the project, I acquired the skill of building a REST API. I have knowledge about working with JSON Web Tokens, and I know how to automatically send emails. Another challenge was implementing the backend application with a database on a web hosting platform to ensure seamless functionality. I strengthened my understanding of the SQL language and database operations. I learned how to integrate multiple programs using different technologies. I expanded my knowledge by working with .env files and gained insights into API, HTTP, SMTP, IPv4, localhost, and computer networks in general.
 
