@@ -1,4 +1,4 @@
-![logo frontend](https://github.com/Grzegorz96/millionaire-app-frontend/assets/129303867/1b1610c8-d435-47a3-92be-df9ce009fef5)
+![logo](https://raw.githubusercontent.com/Grzegorz96/millionaire-app-backend/master/docs/readme-images/logo.png)
 # API for MILLIONAIRE.app and MILLIONAIRE.webapp
 
 The Millionaire API enables users to establish a connection with the database directly from the frontend application. The program encompasses numerous endpoints necessary for the smooth functioning of the frontend. Additionally, it includes a JSON Web Token generator, a function securing endpoints, data input validation, a mechanism refreshing expired access tokens, and a tool for automatically sending generated activation numbers to email. The program is compatible with both Windows and Linux operating systems.
@@ -326,10 +326,10 @@ E-mail: grzesstrzeszewski@gmail.com
 
 ## Screnshoots
 ##### Users table
-![usersmil](https://github.com/Grzegorz96/millionaire-app-backend/assets/129303867/1359819b-f864-46a6-a220-76c1d2c44943)
+![users_table](https://raw.githubusercontent.com/Grzegorz96/millionaire-app-backend/master/docs/readme-images/users_table.png)
 ##### Questions table
-![pytania](https://github.com/Grzegorz96/millionaire-app-backend/assets/129303867/51c53bf2-545a-40e2-920f-96ec5170343d)
-##### Points table
-![score](https://github.com/Grzegorz96/millionaire-app-backend/assets/129303867/668705e1-5ed0-4d93-bdfa-b9d1eaa42643)
+![questions_table](https://raw.githubusercontent.com/Grzegorz96/millionaire-app-backend/master/docs/readme-images/questions_table.png)
+##### Top scores table
+![top_scores_table](https://raw.githubusercontent.com/Grzegorz96/millionaire-app-backend/master/docs/readme-images/top_scores_table.png)
 ##### Email sent from the email sender
-![email](https://github.com/Grzegorz96/millionaire-app-backend/assets/129303867/9ad0ba8e-39bc-45b9-acda-4990033d56e4)
+![email_activation_number](https://raw.githubusercontent.com/Grzegorz96/millionaire-app-backend/master/docs/readme-images/email_activation_number.png)
